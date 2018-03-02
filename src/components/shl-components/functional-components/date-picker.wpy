@@ -1,0 +1,44 @@
+<template>
+    <view  class='date-picker'>
+        <view class="section__title">
+            <picker mode="date" value="{{date}}" end="2017-09-01" @change="bindDateChange">
+                <view>{{date?date:'日期选择器'}}</view>
+            </picker>
+        </view>
+     </view>
+</template>
+
+<script>
+    import wepy from 'wepy';
+    export default class DatePicker extends wepy.component {
+        data = {
+            date: ''
+        }
+        methods = {
+            bindDateChange (e) {
+                console.log('picker发送选择改变，携带值为', e.detail.value);
+                this.date = e.detail.value;
+            }
+        }
+    }
+
+</script>
+
+<style lang="css">
+    .date-picker{
+        width: 100%;
+        overflow:hidden;
+    }
+    .section__title picker view{
+        line-height:94rpx;
+        text-align:center;
+        border:1px solid #E6E6EA;
+        background:#fff;
+        border-radius:5px;
+        color:#666;
+        font-size:36rpx;
+        width:92%;
+        margin:0 auto;
+    }
+   
+</style>

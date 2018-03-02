@@ -1,0 +1,19 @@
+
+<template>
+    <div>
+
+    </div>
+</template>
+
+<script>
+import wepy from 'wepy';
+export default class MarkingComponentPage extends wepy.page {
+    config = {
+        navigationBarTitleText: '营销组件'
+    };
+}
+</script>
+
+<style>
+
+</style>

@@ -1,0 +1,64 @@
+<template>
+    <firstTabIconGirdView :dataList.sync= "firstTabIconDataList"></firstTabIconGirdView>
+    <secondTabIconGirdView :dataList.sync= "secondTabIconDataList"></secondTabIconGirdView>
+    <originalFrameImage></originalFrameImage>
+</template>
+
+<script>
+import wepy from 'wepy';
+import GirdView from '../../components/shl-components/gird-view';
+import OriginalFrameImage from '../../components/shl-components/original-frame-image';
+export default class IconSubTabPage extends wepy.page {
+    config = {
+        navigationBarTitleText: '图标'
+    };
+    components= {
+        firstTabIconGirdView: GirdView,
+        secondTabIconGirdView: GirdView,
+        originalFrameImage: OriginalFrameImage
+    };
+
+    data= {
+        firstTabIconDataList: [
+            {
+                titleText: 'Home',
+                imagePath: '../../components/images/tab_icon/home_tab.png',
+            },
+            {
+                titleText: 'Site management',
+                imagePath: '../../components/images/tab_icon/site_management_tab.png',
+            },
+            {
+                titleText: 'Personal',
+                imagePath: '../../components/images/tab_icon/personal_tab.png',
+            },
+            {
+                titleText: 'Dashboard',
+                imagePath: '../../components/images/tab_icon/dashboard_tab.png',
+            }
+        ],
+        secondTabIconDataList: [
+            {
+                titleText: 'Task',
+                imagePath: '../../components/images/tab_icon/task_tab.png',
+            },
+            {
+                titleText: 'Site',
+                imagePath: '../../components/images/tab_icon/site_tab.png',
+            },
+            {
+                titleText: 'Schedule',
+                imagePath: '../../components/images/tab_icon/schedule_tab.png',
+            },
+            {
+                titleText: 'Personal',
+                imagePath: '../../components/images/tab_icon/mine_tab.png',
+            }
+        ]
+    };
+}
+</script>
+
+<style >
+
+</style>

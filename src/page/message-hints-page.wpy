@@ -1,0 +1,119 @@
+<template>
+    <view class='message_title'>消息提示<view>（待办任务）</view></view>
+    <messageHints :messageHints.sync= "messageHints" @callbackWithCell.user = 'listCallBackActionWithCell'></messageHints>
+    <view class='message_title_tgl'>通告栏</view>
+    <messageNoticeBoard :text.sync= "text" :marqueePace.sync= "marqueePace" :marqueeDistance.sync= "marqueeDistance" :marqueeMargin.sync= "marquee_margin" :size.sync= 'size' :interval.sync= 'interval'></messageNoticeBoard>
+</template>
+
+<script>
+import wepy from 'wepy';
+import MessageHints from '../components/shl-components/message-hints';
+import MessageNoticeBoard from '../components/shl-components/message-notice-board';
+export default class messageHintsPage extends wepy.page {
+    config = {
+        navigationBarTitleText: '消息提示'
+    };
+    components ={
+        messageHints: MessageHints,
+        messageNoticeBoard: MessageNoticeBoard
+    };
+    data = {
+        messageHints: [
+            {
+                number: '1',
+                imgUrl: 'http://shl-resource-public.oss-cn-hangzhou.aliyuncs.com/foreman/index_icon1.png'
+            },
+            {
+                number: '22',
+                imgUrl: 'http://shl-resource-public.oss-cn-hangzhou.aliyuncs.com/foreman/index_icon1.png'
+            },
+            {
+                number: '3',
+                imgUrl: 'http://shl-resource-public.oss-cn-hangzhou.aliyuncs.com/foreman/index_icon1.png'
+            },
+            {
+                number: '444',
+                imgUrl: 'http://shl-resource-public.oss-cn-hangzhou.aliyuncs.com/foreman/index_icon1.png'
+            }
+        ],
+        messageNoticeBoard: '由于某些原因，该任务显示已被延期由于某些原因，该任务显示已被延期由于某些原因，该任务显示已被延期由于某些原因，该任务显示已被延期由于某些原因，该任务显示已被延期',
+        time: 0,
+        text: '这是一条会滚动的文字滚来滚去的文字跑马灯，不错哟这是一条会滚动的文字滚来滚去的文字跑马灯，不错哟',
+        marqueePace: 1,
+        marqueeDistance: 0,
+        marquee_margin: 30,
+        size: 13,
+        interval: 40
+    };
+    methods = {
+        listCallBackActionWithCell(item) {
+            console.log(item);
+            // this.$navigate(item.navigationUrl);
+        },
+    };
+    next () {
+        let windowWidth = wx.getSystemInfoSync().windowWidth;
+        this.time++;
+        if (this.messageNoticeBoard.length > 27 && windowWidth === 375) {
+            // setTimeout(() => {
+            //     this.$apply(() => {
+            //         this.next();
+            //     });
+            // }, 20);
+            // var gundong = document.getElementById("gundong");
+            // var step =1,scrollWidth=gundong.scrollWidth-gundong.offsetWidth;
+            // var timer=setInterval(function () {
+            //     gundong.scrollLeft += step;
+            //     if (step > 0 && gundong.scrollLeft >= scrollWidth) step = -step;
+            //     else if (step <0 && gundong.scrollLeft <=0) step = -step;
+            // }, 50)
+        }
+        if (this.messageNoticeBoard.length > 28 && windowWidth === 414) {
+            // setTimeout(() => {
+            //     this.$apply(() => {
+            //         this.next();
+            //     });
+            // }, 20);
+        }
+        if (this.messageNoticeBoard.length > 28 && windowWidth === 360) {
+            // setTimeout(() => {
+            //     this.$apply(() => {
+            //         this.next();
+            //     });
+            // }, 20);
+        }
+    };
+    onShow() {
+        var that = this;
+        var length = that.text.length * that.size;
+        var windowWidth = wx.getSystemInfoSync().windowWidth;
+        this.length = length;
+        this.windowWidth = windowWidth;
+        that.scrolltxt();// 第一个字消失后立即从右边出现
+    };
+    scrolltxt () {
+        var that = this;
+        var length = that.length;
+        var windowWidth = that.windowWidth;
+        if (length > windowWidth) {
+            var interval = setInterval(() => {
+                var maxscrollwidth = length + that.marquee_margin;
+                var crentleft = that.marqueeDistance;
+                if (crentleft < maxscrollwidth) {
+                    this.marqueeDistance = crentleft + that.marqueePace;
+                } else {
+                    this.marqueeDistance = 0; // 直接重新滚动
+                    clearInterval(interval);
+                    that.scrolltxt();
+                }
+                this.$apply();
+            }, that.interval);
+        } else {
+            this.marquee_margin = '1000';
+        };
+    }
+}
+</script>
+<style type="css" src="../components/css/message-hints-page.css">
+
+</style>

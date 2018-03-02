@@ -1,0 +1,105 @@
+<template>
+    <button class="{{realButtonType}}" bindtap="clickAction">{{buttonConstructor.title}}</button>
+</template>
+
+<script>
+import wepy from 'wepy';
+export default class SHLButton extends wepy.component {
+    props={
+        buttonConstructor: {
+            type: Object,
+            default: 'default'
+        },
+    }
+
+    computed= {
+        realButtonType() {
+            switch (this.buttonConstructor.type) {
+            case 'infoButton':
+                return this.buttonConstructor.enable ? '.info-button' : '.info-button-disable';
+            case 'positiveButton':
+                return this.buttonConstructor.enable ? '.positive-button' : '.positive-button-disable';
+            case 'nagetiveButton':
+                return this.buttonConstructor.enable ? '.nagetive-button' : '.nagetive-button-disable';
+            case 'dismissButton':
+                return '.dismiss-button';
+            case 'hollowButton':
+                return '.hollow-button';
+            case 'normalButton':
+                return '.normal-button';
+            default:
+                return '.info-button';
+            }
+        }
+    }
+
+    methods= {
+        clickAction() {
+            if (this.buttonConstructor.enable) {
+                this.$emit('touchUpInside', this.buttonConstructor);
+            }
+        }
+    }
+}
+</script>
+
+<style>
+.hollow-button{
+    border-radius: 5px;
+    background-color: rgba(0,0,0,0);
+    border: 0.5px solid #FEB34A;
+    color:#FEB34A;
+    padding: 0px;
+}
+.normal-button{
+    border-radius: 5px;
+    background-color: #fff;
+    color:#FEB34A;
+    padding: 0px;
+}
+.info-button{
+    border-radius: 5px;
+    background-color: #FEB34A;
+    color:white;
+    padding: 0px;
+}
+.info-button-disable{
+    border-radius: 5px;
+    background-color: #FEB34A;
+    opacity: 0.4;
+    color:white;
+    padding: 0px;
+}
+.positive-button{
+    border-radius: 5px;
+    background-color: #1AAD19;
+    color:white;
+    padding: 0px;
+}
+.positive-button-disable{
+    border-radius: 5px;
+    background-color: #1AAD19;
+    opacity: 0.4;
+    color:white;
+    padding: 0px;
+}
+.nagetive-button{
+    border-radius: 5px;
+    background-color: #FE794A;
+    color:white;
+    padding: 0px;
+}
+.nagetive-button-disable{
+    border-radius: 5px;
+    background-color: #FE794A;
+    opacity: 0.4;
+    color:white;
+    padding: 0px;
+}
+.dismiss-button{
+    border-radius: 5px;
+    background-color: #F8F8F8;
+    color:000000;
+    padding: 0px;
+}
+</style>

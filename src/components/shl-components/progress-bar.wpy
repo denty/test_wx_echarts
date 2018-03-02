@@ -1,0 +1,72 @@
+<template>
+    <view class="progressbg" style="border-radius:{{progressConstructor.borderRadius}}px; background-color: {{progressConstructor.backgroundColor}}; height: {{progressConstructor.strokeWidth}}px">
+        <view class="progress-line-holder" style=" width: {{progressConstructor.percent}}%; height: {{progressConstructor.strokeWidth}}px; border-radius:{{progressConstructor.borderRadius}}px;">
+            <view class="progressline" style=" {{ progressConstructor.duration ? 'animation:active ' + progressConstructor.duration + 's;' : ''}}  height: {{progressConstructor.strokeWidth}}px; border-radius:{{progressConstructor.borderRadius}}px; {{ progressConstructor.activeLineColor[1] ? 'background-image: linear-gradient(to right, ' + progressConstructor.activeLineColor[0] + ', ' + progressConstructor.activeLineColor[1] + ');' : 'background-color:' + progressConstructor.activeLineColor[0] + ';'}}"></view>
+        </view>
+    </view>
+</template>
+
+<script>
+import wepy from 'wepy';
+/** 构建对象
+ * progressBarConstructorData: {
+            duration: 2,                //动画时间
+            percent: 40,                //进度百分比
+            strokeWidth: 8,             //进度条高度
+            backgroundColor: '#EEEEEE', //背景颜色
+            activeLineColor: [          //进度条颜色(传入两个颜色为渐变效果)
+                '#FFD163'
+            ],
+            borderRadius: 5             //进度条圆角角度
+        },
+*/
+export default class ProgressBar extends wepy.component {
+    props= {
+        progressConstructor: {
+            type: Object
+        }
+    }
+
+    data= {
+        animationData: {}
+    }
+
+    // MARK: 动画无法在组件中调用
+    makeAnimation() {
+        console.log('makeAnimation');
+        this.animation = wx.createAnimation({
+            duration: 10000,
+            timingFunction: 'linear',
+            delay: 1000
+        });
+        this.animation.width(300).step();
+        this.setData({
+            animationData: this.animation.export()
+        });
+    }
+    onLoad() {
+    }
+}
+</script>
+
+<style>
+.progress-line-holder{
+    border-radius: 5px;
+    background-color:rgba(1, 1, 1, 0);
+    height: 8px;
+}
+@keyframes active { 
+    from {width:0%;} 
+    to {width: 100%;} 
+}
+.progressbg{
+    border-radius: 5px;
+    background-color: #EEEEEE;
+    height: 8px;
+}
+.progressline{
+    border-radius: 5px;
+    background-color: #FFD163;
+    height: 8px;
+}
+</style>

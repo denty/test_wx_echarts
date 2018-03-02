@@ -1,0 +1,73 @@
+<template>
+    <view class="listMoreDetail">
+        <navigator wx:for='{{listMoreDetail}}' class="listMorecell">
+            <view class='solori'>
+                <view class='left'>{{item.title}}</view>
+                <view class='right'>
+                    <i>详细信息</i>
+                    <image src='http://shl-resource-public.oss-cn-hangzhou.aliyuncs.com/battlefury/right_icon.png'></image>
+                </view>
+            </view>
+        </navigator>
+    </view>
+</template>
+
+<script>
+    import wepy from 'wepy';
+    export default class ListMoreDetail extends wepy.component {
+        props = {
+            // 父向子单向动态传值
+            listMoreDetail: {
+                type: [Object],
+                default: []
+            }
+        };
+    }
+
+</script>
+
+<style lang="css">
+    .listMoreDetail{
+        width: 100%;
+        background: #fff;
+        margin-bottom: 20rpx;
+    }
+    .listMoreDetail .listMorecell{
+        background: #fff;
+        width: 100%;
+        text-align: left;
+        font-size: 34rpx;
+        color: #333;
+        line-height: 48rpx;
+        display:block;
+        padding:24rpx 0;
+        border-bottom:1px solid #F4F4F4;
+        margin-left:24rpx;
+
+    }
+    .listMoreDetail .listMorecell:last-child{
+        border: none;
+    }
+    .listMoreDetail .listMorecell .solori{
+        width: 94%;
+        overflow: hidden;
+    }
+    .listMoreDetail .solori .left{
+        float: left;
+    }
+    .listMoreDetail .listMorecell .solori .right{
+        overflow: hidden;
+        float: right;
+    }
+    .listMoreDetail .listMorecell .solori .right i{
+        color:#999;
+        font-size:32rpx;
+    }
+    .listMoreDetail .listMorecell .solori image{
+        width:16rpx;
+        height:26rpx;
+        float:right;
+        margin: 10rpx 0 0 10rpx;
+    }
+  
+</style>

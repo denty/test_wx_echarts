@@ -1,0 +1,57 @@
+<template>
+<view class= "sectionTitle">方形头像</view>
+<squareHeadshotGridView :dataList.sync= "squareHeadshotObjList"></squareHeadshotGridView>
+<view class= "sectionTitle">圆形头像</view>
+<circularHeadshotGridView :dataList.sync= "circularHeadshotObjList"></circularHeadshotGridView>
+</template>
+
+<script>
+import wepy from 'wepy';
+import GridView from '../components/shl-components/gird-view';
+export default class HeadshotPage extends wepy.page {
+    config = {
+        navigationBarTitleText: '头像'
+    };
+    components= {
+        squareHeadshotGridView: GridView,
+        circularHeadshotGridView: GridView
+    }
+
+    data={
+        squareHeadshotObjList: [
+            {
+                titleText: '小头像',
+                imagePath: '../components/images/headshot_icon/tiny_headshot_square.png'
+            },
+            {
+                titleText: '默认头像',
+                imagePath: '../components/images/headshot_icon/normal_headshot_square.png'
+            },
+            {
+                titleText: '大头像',
+                imagePath: '../components/images/headshot_icon/large_headshot_square.png'
+            }
+        ],
+        circularHeadshotObjList: [
+            {
+                titleText: '小头像',
+                imagePath: '../components/images/headshot_icon/tiny_headshot_circular.png'
+            },
+            {
+                titleText: '默认头像',
+                imagePath: '../components/images/headshot_icon/normal_headshot_circular.png'
+            },
+            {
+                titleText: '大头像',
+                imagePath: '../components/images/headshot_icon/large_headshot_circular.png'
+            }
+        ]
+    }
+}
+</script>
+
+<style>
+.sectionTitle{
+    margin-left: 20px
+}
+</style>

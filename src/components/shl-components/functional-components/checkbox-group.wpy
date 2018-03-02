@@ -1,0 +1,50 @@
+<template>
+    <view  class='checkbox-group'>
+        <checkbox-group class="checkbox-group">
+            <label class="checkbox" wx:for="{{CheckboxGroup}}">
+                <checkbox  @tap='click({{item}})' value="{{item.name}}" checked="{{item.checked}}" color='orange'/>{{item.value}}
+            </label>
+        </checkbox-group>
+     </view>
+</template>
+
+<script>
+    import wepy from 'wepy';
+    export default class CheckboxGroup extends wepy.component {
+        props = {
+            // 父向子单向动态传值
+            CheckboxGroup: {
+                type: [Object],
+                default: []
+            }
+        };
+        methods = {
+            click(item) {
+                this.$emit('checkBoxCallbackWithCell', item);
+            }
+        }
+    }
+
+</script>
+
+<style lang="css">
+    .checkbox-group{
+        width: 100%;
+        overflow:hidden;
+        background: #fff;
+    }
+   .checkbox-group label{
+        display:block;
+        border-bottom:1px solid #ECECEC;
+        padding:24rpx 24rpx 24rpx 0;
+        margin-left:24rpx;
+        font-size:34rpx;
+        color:#333;
+   }
+   .checkbox-group label:last-child{
+       border:none;
+   }
+   .checkbox-group label checkbox{
+       float: right;
+   }
+</style>

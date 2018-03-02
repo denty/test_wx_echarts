@@ -1,0 +1,106 @@
+<template>
+   <view class="weui-cell__bd">
+        <view class="weui-uploader">
+        <view class="weui-uploader__bd">
+            <view class="weui-uploader__files" id="uploaderFiles">
+            <block wx:for-items="{{ossFiles}}" wx:key="{{index}}">
+                <view class="weui-uploader__file weui-uploader__file_status" @tap="previewImage" id="{{item}}">
+                    <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
+                    <view class="t-upload-delete" @tap.stop="deleteimg" data-t="{{index}}">
+                        <icon type="clear" size="23" color="#F43530"></icon>
+                    </view>
+                </view>
+            </block>
+            </view>
+            <view class="weui-uploader__input-box">
+            <view class="weui-uploader__input"  @tap="chooseImage"></view>
+            </view>
+        </view>
+        </view>
+    </view>
+</template>
+
+<script>
+    import wepy from 'wepy';
+    export default class UploadImage extends wepy.component {
+        data = {
+            ossFiles: []
+        }
+        methods = {
+            async chooseImage (e) {
+                let res = await wepy.chooseImage({
+                    sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+                    sourceType: ['album', 'camera'] // 可以指定来源是相册还是相机，默认二者都有
+                });
+                console.log(res.tempFilePaths);
+                this.ossFiles = this.ossFiles.concat(res.tempFilePaths);
+                this.$apply();
+            },
+            previewImage (e) {
+                wepy.previewImage({
+                    current: e.currentTarget.id, // 当前显示图片的http链接
+                    urls: this.data.ossFiles // 需要预览的图片http链接列表
+                });
+            },
+            deleteimg (e) {
+                let that = this;
+                var _ossFiles = that.ossFiles;
+                _ossFiles.splice(e.currentTarget.dataset.t, 1);
+                that.ossFiles = _ossFiles;
+            }
+        }
+    }
+
+</script>
+
+<style lang="css">
+   .weui-cell__bd {
+        overflow: hidden;
+        -webkit-box-flex:1;
+        -webkit-flex:1;
+        flex:1;
+        background: #fff;
+   }
+   .weui-uploader{
+        padding:12px 12px 5px 12px
+   }
+   .weui-uploader__bd{
+        margin-bottom:-4px;
+        margin-right:-9px;
+        overflow: inherit;
+   }
+   .weui-uploader__input-box{
+       float:left;
+        position:relative;
+        margin-right:9px;
+        margin-bottom:9px;
+        width:77px;
+        height:77px;
+        border:1px solid #D9D9D9;
+   }
+   .weui-uploader__input{
+       position:absolute;
+        z-index:1;
+        top:0;
+        left:0;
+        width:100%;
+        height:100%;
+        opacity:0;
+   }
+   .weui-uploader__file{
+        float:left;
+        margin-right:9px;
+        margin-bottom:9px;
+        width:77px;
+        height:77px;
+   }
+   .t-upload-delete {
+        position:absolute;
+        top:4%;
+        left:90%;
+        -webkit-transform:translate(-50%, -50%);
+        transform:translate(-50%, -50%);
+        color:#FFFFFF;
+
+   }
+</style>

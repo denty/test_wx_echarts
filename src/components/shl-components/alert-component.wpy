@@ -1,0 +1,219 @@
+<template>  
+  <view class="alert {{show ? 'alert_show' : ''}}">
+        <view class="alert_mask" wx:if="{{mask}}"></view>
+        <!-- 弹出操作提示框单一提示按钮 -->
+        <view class="alert_bd" animation="{{animationData}}" wx:if="{{isAlert}}">
+            <view class="alert_bd_title" >{{title}}</view>
+            <view wx:if="{{img}}">
+                <view class="alert_bd_img">
+                    <alertImage :imageObj.sync= "imageObj"></alertImage>
+                </view>
+            </view>
+            <view wx:if="{{content}}">
+                <view class="alert_bd_text">{{content}}</view>
+            </view>
+            <view class="split-line" style="width: 100%"></view>
+            <view bindtap="ensureClick">
+                <view style="font-size: 18px; color: #FFA400; height: 50px; line-height: 50px;">知道了</view>
+            </view>
+        </view>
+        <!-- 弹出Toast类型提示框无交互 -->
+        <view class="toast_bd" animation="{{animationData}}" wx:if="{{!isAlert}}">
+            <view wx:if="{{img}}">
+                <view class="alert_bd_img">
+                    <alertImage :imageObj.sync= "imageObj"></alertImage>
+                </view>
+            </view>
+            <view wx:if="{{content}}">
+                <view class="toast_bd_title">{{content}}</view>
+            </view>
+        </view>
+    </view>  
+</template>  
+
+<script>
+import wepy from 'wepy';
+import OriginImage from '../shl-components/original-frame-image';
+export default class AlertComponent extends wepy.component {
+    data = {
+        show: false,
+        img: '',
+        animationData: '',
+        imgClassName: '',
+        imgMode: 'scaleToFill',
+        title: '载入中...',
+        content: '',
+        titleClassName: '',
+        duration: 0,
+        imageObj: null,
+        isAlert: true,
+        mask: true,
+    };
+
+    components= {
+        alertImage: OriginImage
+    }
+
+    methods= {
+        ensureClick() {
+            console.log('hheheheheheehehehehe');
+            if (typeof this.ensureBlock === 'function') {
+                this.ensureBlock();
+            }
+            this.hideAlert();
+        }
+    }
+
+    showAlert (data = {}) {
+        this.show = true;
+        this.isAlert = true;
+        this.mask = true;
+        for (let k in data) {
+            this[k] = data[k];
+        }
+        this.imageObj = {
+            imagePath: data.img
+        };
+        this.$apply();
+        setTimeout(() => {
+            let animation = wx.createAnimation();
+            animation.opacity(1).step();
+            this.animationData = animation.export();
+            this.show = true;
+            this.$apply();
+        }, 30);
+    };
+
+    showToast (data = {}) {
+        this.show = true;
+        this.isAlert = false;
+        this.mask = false;
+        for (let k in data) {
+            this[k] = data[k];
+        }
+        this.imageObj = {
+            imagePath: data.img
+        };
+        this.$apply();
+        setTimeout(() => {
+            let animation = wx.createAnimation();
+            animation.opacity(1).step();
+            this.animationData = animation.export();
+            this.show = true;
+            this.$apply();
+        }, 30);
+        if (data.duration) {
+            setTimeout(() => {
+                this.hideAlert();
+            }, data.duration);
+        } else {
+            setTimeout(() => {
+                this.hideAlert();
+            }, 2000);
+        }
+    }
+
+    hideAlert () {
+        this.show = false;
+        let animation = wx.createAnimation();
+        animation.opacity(0).step();
+        this.animationData = animation.export();
+        this.$apply();
+        if (typeof this.data.success === 'function') {
+            return this.data.success(this.data);
+        }
+    }
+}
+</script>
+
+<style>
+.alert {
+    display: none;
+}
+.alert_show {
+    display: block;
+}
+.alert_mask {
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6)
+}
+.alert_bd {
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    z-index: 5000;
+    min-width: 280px;
+    max-width: 70%;
+    top: 140px;
+    left: 50%;
+    padding: 15px;
+    box-sizing: border-box;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 1);
+    border-radius: 5px;
+    color: #FFFFFF;
+    word-wrap: break-word;
+    word-break: break-all;
+    align-items: center;
+    padding-bottom: 0px;
+}
+.toast_bd {
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    z-index: 5000;
+    min-width: 150px;
+    max-width: 70%;
+    top: 140px;
+    left: 50%;
+    padding: 15px;
+    box-sizing: border-box;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.75);
+    border-radius: 5px;
+    color: #FFFFFF;
+    word-wrap: break-word;
+    word-break: break-all;
+    align-items: center;
+    padding-bottom: 0px;
+}
+.alert_bd_img {
+    margin-top: 3px;
+}
+.alert_bd_img_desc {
+    width: 55px;
+    height: 55px;
+    vertical-align: middle;
+}
+.alert_bd_title {
+    margin: 3px 0;
+    font-size: 18px;
+    color: #333333;
+}
+.toast_bd_title {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #FFFFFF;
+    text-align: center;
+    font-weight: 300;
+}
+.alert_bd_text {
+    margin: 3px 0;
+    font-size: 15px;
+    color: #999999;
+}
+.split-line{
+    margin-top: 10px;
+    height: 1px;
+    margin-left: 0px;
+    margin-right: 10px;
+    background-color:#ECECEC;
+}
+</style>

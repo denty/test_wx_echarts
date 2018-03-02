@@ -1,0 +1,55 @@
+<template>
+    <view  class='ordinary-picker'>
+        <view class="ordinary-picker-title">
+            <picker @change="bindPickerChange" value='{{index}}' range="{{OrdinaryPicker}}">
+                <view class="picker">
+                    {{OrdinaryPicker[index]?OrdinaryPicker[index]:'普通选择器'}}
+                </view>
+            </picker>
+        </view>
+        
+     </view>
+</template>
+
+<script>
+    import wepy from 'wepy';
+    export default class OrdinaryPicker extends wepy.component {
+        props = {
+            OrdinaryPicker: {
+                type: [Object],
+                default: []
+            },
+            index: {
+                type: Number,
+                default: 'nothing',
+                twoWay: true
+            }
+        };
+        methods = {
+            bindPickerChange(e) {
+                console.log('picker发送选择改变，携带值为', e.detail.value);
+                this.$emit('OrdinaryPicker', e.detail.value);
+            }
+        }
+    }
+
+</script>
+
+<style lang="css">
+    .ordinary-picker{
+        width: 100%;
+        overflow:hidden;
+    }
+    .ordinary-picker-title picker view{
+        line-height:94rpx;
+        text-align:center;
+        border:1px solid #E6E6EA;
+        background:#fff;
+        border-radius:5px;
+        color:#666;
+        font-size:36rpx;
+        width:92%;
+        margin:0 auto;
+    }
+   
+</style>

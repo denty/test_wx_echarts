@@ -1,0 +1,246 @@
+<template>
+    <view class="flex-grow flex flex-tb flex-align-center">
+        <view class="calendar pink-color flex flex-tb">
+            <view class="top-handle fs28 flex flex-lr flex-align-center flex-pack-center">
+                <view class="prev flex flex-rl" bindtap="switchMonth" data-handle="prev">
+                    <view class="prev-handle flex flex-lr flex-align-center flex-pack-center">←</view>
+                </view>
+                <view bindtap="chooseYearAndMonth" class="date-area year-title flex flex-lr flex-align-center flex-pack-center">{{curYear}} / {{curMonth}}</view>
+                <view class="next flex flex-lr" bindtap="switchMonth" data-handle="next">
+                    <view class="next-handle flex flex-lr flex-align-center flex-pack-center">→</view>
+                </view>
+            </view>
+            <view class="weeks flex flex-lr flex-pack-center flex-align-center">
+                <view wx:for="{{weeksCh}}" wx:key="{{index}}" data-idx="{{index}}" class="flex-grow week fs28 {{(index%7 == 0 || index%7 == 6) ? 'weekend-color' : ''}}">{{item}}</view>
+            </view>
+            <view class="days flex flex-lr flex-wrap">
+                <view wx:if="{{emptyDayGrids}}" class="grid white-color flex flex-align-center flex-pack-center" wx:for="{{emptyDayGrids}}"
+                    wx:key="{{index}}" data-idx="{{index}}">
+                </view>
+                <view class="grid white-color flex flex-align-center flex-pack-center" wx:for="{{days}}" wx:key="{{index}}" data-idx="{{index}}"
+                    bindtap="tapDayItem">
+                    <view class="day {{((index+emptyDayGrids.length)%7 == 0 || (index+emptyDayGrids.length)%7 == 6) && !item.choosed  ? 'weekend-color' : ''}} {{item.choosed ? 'border-radius orange-bg' : ''}} flex flex-align-center flex-pack-center">{{item.day}}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>
+
+<script>
+    import wepy from 'wepy';
+    export default class Calender extends wepy.component {
+        components = {};
+        data = {
+            weeksCh: [
+                '日', '一', '二', '三', '四', '五', '六'
+            ],
+            date: new Date(),
+            curYear: 2018,
+            curMonth: 2,
+            days: []
+        };
+        onLoad() {
+            console.log(new Date());
+            this.date = new Date();
+            this.curYear = this.date.getFullYear();
+            this.curMonth = this.date.getMonth() + 1;
+            this.calculateDays(this.curYear, this.curMonth);
+        }
+        methods = {
+            switchMonth(el) {
+                const type = el.currentTarget.dataset.handle;
+                let newMonth = this.curMonth;
+                let newYear = this.curYear;
+                if (type === 'prev') {
+                    if (newMonth <= 1) {
+                        newYear = this.curYear - 1;
+                        newMonth = 12;
+                    } else {
+                        newMonth = this.curMonth - 1;
+                    }
+                } else {
+                    if (newMonth >= 12) {
+                        newYear = this.curYear + 1;
+                        newMonth = 1;
+                    } else {
+                        newMonth = this.curMonth + 1;
+                    }
+                }
+                this.curMonth = newMonth;
+                this.curYear = newYear;
+                this.calculateDays(this.curYear, this.curMonth);
+            },
+            tapDayItem(e) {
+                const idx = e.currentTarget.dataset.idx;
+                const days = this.days;
+                days[idx].choosed = !days[idx].choosed;
+                this.days = days;
+            },
+        };
+        computed = {
+            emptyDayGrids() {
+                const firstDayOfWeek = this.getFirstDayOfWeek();
+                let empytGrids = [];
+                if (firstDayOfWeek > 0) {
+                    for (let i = 0; i < firstDayOfWeek; i++) {
+                        empytGrids.push(i);
+                    }
+                }
+                return empytGrids;
+            }
+        }
+        getFirstDayOfWeek() {
+            return new Date(Date.UTC(this.curYear, this.curMonth - 1, 1)).getDay();
+        }
+        calculateDays(year, month) {
+            let days = [];
+            const thisMonthDays = this.getThisMonthDays(year, month);
+            for (let i = 1; i <= thisMonthDays; i++) {
+                days.push({
+                    day: i,
+                    choosed: false
+                });
+            }
+            this.days = days;
+        }
+        getThisMonthDays() {
+            return new Date(this.curYear, this.curMonth, 0).getDate();
+        }
+    }
+
+</script>
+
+<style>
+    .flex {
+        display: flex;
+    }
+
+    .flex-lr {
+        flex-direction: row;
+    }
+
+    .flex-rl {
+        flex-direction: row-reverse;
+    }
+
+    .flex-tb {
+        flex-direction: column;
+    }
+
+    .flex-pack-center {
+        justify-content: center;
+    }
+
+    .flex-align-center {
+        align-items: center;
+    }
+
+    .flex-wrap {
+        flex-wrap: wrap;
+    }
+
+    .flex-grow {
+        flex-grow: 1;
+    }
+
+    .year-title {
+        font-size: 18px;
+        font-weight: 400;
+    }
+    
+    .title-color {
+        color: #333333;
+    }
+
+    .white-color {
+        color: #fff;
+    }
+
+    .fs24 {
+        font-size: 24rpx;
+    }
+
+    .fs28 {
+        font-size: 28rpx;
+    }
+
+    .fs32 {
+        font-size: 32rpx;
+    }
+
+    .fs36 {
+        font-size: 36rpx;
+    }
+
+    .top-handle {
+        height: 80px;
+    }
+
+    .prev {
+        text-align: right;
+        height: 80rpx;
+    }
+
+    .next {
+        height: 80rpx;
+    }
+
+    .prev-handle {
+        width: 80rpx;
+        height: 100%;
+    }
+
+    .next-handle {
+        width: 80rpx;
+        height: 100%;
+    }
+
+    .date-area {
+        width: 50%;
+        height: 80px;
+        text-align: center;
+    }
+
+    .weeks {
+        height: 50rpx;
+        line-height: 50rpx;
+    }
+
+    .week {
+        text-align: center;
+    }
+
+    .days {
+        height: 500rpx;
+    }
+
+    .grid {
+        /* width: 107.1428571429rpx; */
+        width: 14.2857142%
+    }
+
+    .day {
+        width: 60rpx;
+        height: 60rpx;
+        color: #333333;
+        font-size: 26rpx;
+        font-weight: 200;
+    }
+
+    .border-radius {
+        border-radius: 50%;
+        position: relative;
+        left: 0;
+        top: 0;
+        color: #fff;
+    }
+
+    .orange-bg {
+        background-color: #FFA400;
+    }
+
+    .weekend-color {
+        color: #999999;
+    }
+
+</style>

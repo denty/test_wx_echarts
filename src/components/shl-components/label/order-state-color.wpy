@@ -1,0 +1,56 @@
+<template>
+    <view class="orderStateColor">
+        <view wx:for='{{orderStateColor}}' class='{{item.color}}'>
+            {{item.state}}
+        </view>
+    </view>
+</template>
+
+<script>
+    import wepy from 'wepy';
+    export default class OrderOrderStateColor extends wepy.component {
+        props = {
+            // 父向子单向动态传值
+            orderStateColor: {
+                type: [Object],
+                default: []
+            }
+        }
+    }
+
+</script>
+
+<style lang="css">
+    .orderStateColor{
+        width: 100%;
+        background: #FAFAFA;
+        padding: 0 24rpx;
+        overflow: hidden;
+    }
+    .orderStateColor view{
+        float: left;
+        font-size:28rpx;
+        margin: 0 3% 2% 0;
+    }
+    .orderStateColor view.wqy{
+        color: #000;
+    }
+    .orderStateColor view.yqw{
+        color: #57A7EF;
+    }
+    .orderStateColor view.ykg{
+        color: #7169EE;
+    }
+    .orderStateColor view.ywg{
+        color: #524BE5;
+    }
+    .orderStateColor view.yys{
+        color: #B74CE9;
+    }
+    .orderStateColor view.yzf{
+        color: #0073D5;
+    }
+    .orderStateColor view.yyq{
+        color: #EA6666;
+    }
+</style>

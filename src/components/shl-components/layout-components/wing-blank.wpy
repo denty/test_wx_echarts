@@ -1,0 +1,43 @@
+<template>
+    <view class="wing-blank {{size}}">
+        <slot>占位符</slot>
+    </view>
+</template>
+
+<script>
+    import wepy from 'wepy';
+    export default class LayoutComponent extends wepy.component {
+        props= {
+            size: {
+                type: String,
+                default: 'medium'
+            }
+        }
+        components = {};
+        data = {};
+        methods = {};
+    }
+</script>
+
+<style>
+  .wing-blank {
+    display: block;
+    box-sizing: border-box;
+  }
+
+  .mini {
+    margin: 0 10px;
+  }
+
+  .medium {
+    margin: 0 15px;
+  }
+
+  .big {
+      margin: 0 20px;
+  }
+
+  .large {
+    margin: 0 40px;
+  }
+</style>

@@ -1,0 +1,52 @@
+<template>
+    <view class="state">
+        <view wx:for='{{state}}' class='{{item.type}}'>
+            {{item.name}}
+        </view>
+    </view>
+</template>
+
+<script>
+    import wepy from 'wepy';
+    export default class State extends wepy.component {
+        props = {
+            // 父向子单向动态传值
+            state: {
+                type: [Object],
+                default: []
+            }
+        }
+    }
+
+</script>
+
+<style lang="css">
+    .state{
+        width: 100%;
+        background: #FAFAFA;
+        padding: 0 24rpx;
+        overflow: hidden;
+    }
+    .state view{
+        float: left;
+        border-radius:10rpx;
+        font-size:23rpx;
+        background:#3E6ED3;
+        color:#fff;
+        margin-right:3%;
+        box-sizing:border-box;
+        padding:2px;
+        border-top-right-radius:0;
+        width:72rpx;
+        text-align:center;
+    }
+    .state view.urgent{
+        background: none;
+        background:linear-gradient(to right,#FF777C,#E04D52)
+    }
+    .state view.noUrgent{
+        background: none;
+        width: 81rpx;
+        background:linear-gradient(to right,#82BEFC,#406ED4)
+    }
+</style>

@@ -1,0 +1,58 @@
+<template>
+    <view class="listMore">
+        <navigator wx:for='{{listMore}}' class="listMorecell">
+            <view class='solori'>{{item.title}}
+                <image src='http://shl-resource-public.oss-cn-hangzhou.aliyuncs.com/battlefury/right_icon.png'></image>
+            </view>
+        </navigator>
+    </view>
+</template>
+
+<script>
+    import wepy from 'wepy';
+    export default class ListMore extends wepy.component {
+        props = {
+            // 父向子单向动态传值
+            listMore: {
+                type: [Object],
+                default: []
+            }
+        };
+    }
+
+</script>
+
+<style lang="css">
+  .listMore{
+    width: 100%;
+    background: #fff;
+    margin-bottom: 20rpx;
+  }
+  .listMore .listMorecell{
+    background: #fff;
+    width: 100%;
+    text-align: left;
+    font-size: 34rpx;
+    color: #333;
+    line-height: 48rpx;
+    display:block;
+    padding:24rpx 0;
+    border-bottom:1px solid #F4F4F4;
+    margin-left:24rpx;
+
+  }
+  .listMore .listMorecell:last-child{
+      border: none;
+  }
+  .listMore .listMorecell .solori{
+      width: 94%;
+      overflow: hidden;
+  }
+  .listMore .listMorecell .solori image{
+    width:16rpx;
+    height:26rpx;
+    float:right;
+    margin-top: 10rpx;
+  }
+  
+</style>

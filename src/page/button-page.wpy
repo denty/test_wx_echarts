@@ -1,0 +1,165 @@
+<template>
+    <view class="contextHeader">按钮</view>
+    <view class="contentHolder"> 
+        <view class="sectionHeader">普通按钮</view>
+        <infoButton class="full-button" :buttonConstructor= "infoButtonConstructor"></infoButton>
+        <positiveButton class="full-button" :buttonConstructor= "positiveButtonConstructor"></positiveButton>
+        <dismissButton class="full-button" :buttonConstructor= "dismissButtonConstructor"></dismissButton>
+    </view>
+
+    <view class="contentHolder"> 
+        <view class="sectionHeader">小按钮</view>
+        <view class="row">
+            <halfInfoButton class="half-button" :buttonConstructor= "halfInfoButtonConstructor"></halfInfoButton>
+            <halfNagetiveButton class="half-button" :buttonConstructor= "halfNagetiveButtonConstructor"></halfNagetiveButton>
+        </view>
+        <view class="row">
+            <littleNormalButton class="little-button" :buttonConstructor= "littleNormalButtonConstructor"></littleNormalButton>
+            <littleHollowButton class="little-button" :buttonConstructor= "littleHollowButtonConstructor"></littleHollowButton>
+            <littleInfoButton class="little-button" :buttonConstructor= "littleInfoButtonConstructor"></littleInfoButton>
+        </view>
+    </view>
+
+    <view class="contentHolder"> 
+        <view class="sectionHeader">disable</view>
+        <disableInfoButton class="full-button" :buttonConstructor= "disableInfoButtonConstructor"></infoButton>
+        <disablePositiveButton class="full-button" :buttonConstructor= "disablePositiveButtonConstructor"></infoButton>
+        <view class="row">
+            <disableHalfInfoButton class="half-button" :buttonConstructor= "disableHalfInfoButtonConstructor"></halfInfoButton>
+            <disableHalfNagetiveButton class="half-button" :buttonConstructor= "disableHalfNagetiveButtonConstructor"></halfNagetiveButton>
+        </view>
+    </view>
+</template>
+
+<script>
+import wepy from 'wepy';
+import SHLButton from '../components/shl-components/shl-button';
+export default class buttonPage extends wepy.page {
+    data={
+        infoButtonConstructor: {
+            type: 'infoButton',
+            title: '量房签到',
+            enable: true
+        },
+        positiveButtonConstructor: {
+            type: 'positiveButton',
+            title: '确认',
+            enable: true
+        },
+        dismissButtonConstructor: {
+            type: 'dismissButton',
+            title: '返回',
+            enable: true
+        },
+        halfInfoButtonConstructor: {
+            type: 'infoButton',
+            title: '验收通过',
+            enable: true
+        },
+        halfNagetiveButtonConstructor: {
+            type: 'nagetiveButton',
+            title: '验收未通过',
+            enable: true
+        },
+        littleNormalButtonConstructor: {
+            type: 'normalButton',
+            title: '搜索',
+            enable: true
+        },
+        littleHollowButtonConstructor: {
+            type: 'hollowButton',
+            title: '搜索',
+            enable: true
+        },
+        littleInfoButtonConstructor: {
+            type: 'infoButton',
+            title: '搜索',
+            enable: true
+        },
+        disableInfoButtonConstructor: {
+            type: 'infoButton',
+            title: '量房签到',
+            enable: false
+        },
+        disablePositiveButtonConstructor: {
+            type: 'positiveButton',
+            title: '确认',
+            enable: false
+        },
+        disableHalfInfoButtonConstructor: {
+            type: 'infoButton',
+            title: '验收通过',
+            enable: false
+        },
+        disableHalfNagetiveButtonConstructor: {
+            type: 'nagetiveButton',
+            title: '验收未通过',
+            enable: false
+        },
+    };
+    config = {
+        navigationBarTitleText: '按钮'
+    };
+    components ={
+        infoButton: SHLButton,
+        positiveButton: SHLButton,
+        // MARK: 小按钮
+        halfInfoButton: SHLButton,
+        halfNagetiveButton: SHLButton,
+        littleNormalButton: SHLButton,
+        littleHollowButton: SHLButton,
+        littleInfoButton: SHLButton,
+        // MARK: 禁用状态
+        dismissButton: SHLButton,
+        disableInfoButton: SHLButton,
+        disablePositiveButton: SHLButton,
+        disableHalfInfoButton: SHLButton,
+        disableHalfNagetiveButton: SHLButton,
+    }
+}
+</script>
+
+<style>
+.contextHeader{
+    margin-left: 20px;
+    margin-top: 30px;
+    font-size: 17px;
+}
+.sectionHeader{
+    margin-top: 20px;
+    margin-left: 20px;
+    font-size: 14px;
+}
+.row{
+    margin-top: 10px;
+    display: flex;
+}
+.contentHolder{
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+.full-button{
+    height: 49px;
+    line-height: 49px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.half-button{
+    height: 49px;
+    line-height: 49px;
+    flex: 1;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+.little-button{
+    width: 50px;
+    height: 35px;
+    font-size: 16px;
+    line-height: 35px;
+    /* margin-left: 20px; */
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+</style>

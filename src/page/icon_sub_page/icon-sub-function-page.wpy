@@ -1,0 +1,111 @@
+<template>
+    <view>
+        <iconBigGirdView :dataList.sync= "iconBigList" ></iconBigGirdView>
+        <view class='space'></view>
+        <iconSmallGirdView :dataList.sync= "iconSmallList" ></iconSmallGirdView>
+        <view class='space'></view>
+    </view>
+</template>
+
+<script>
+import wepy from 'wepy';
+import GirdView from '../../components/shl-components/gird-view';
+export default class IconSubFunctionPage extends wepy.page {
+    config= {
+        navigationBarTitleText: '图标'
+    };
+    components= {
+        iconBigGirdView: GirdView,
+        iconSmallGirdView: GirdView
+    };
+    data= {
+        iconBigList: [
+            {
+                titleText: 'Measuring room',
+                imagePath: '../../components/images/function_icon/measuring-room.png',
+            },
+            {
+                titleText: 'Start sign',
+                imagePath: '../../components/images/function_icon/start-working.png',
+            },
+            {
+                titleText: 'Daily',
+                imagePath: '../../components/images/function_icon/daily.png',
+            },
+            {
+                titleText: 'Acceptance',
+                imagePath: '../../components/images/function_icon/acceptance.png',
+            },
+            {
+                titleText: 'Problem',
+                imagePath: '../../components/images/function_icon/problem.png',
+            },
+            {
+                titleText: 'Schedule',
+                imagePath: '../../components/images/function_icon/schedule.png',
+            },
+            {
+                titleText: 'Evaluation',
+                imagePath: '../../components/images/function_icon/evaluation.png',
+            }
+        ],
+        iconSmallList: [
+            {
+                titleText: 'cancel',
+                imagePath: '../../components/images/function_icon/cancel.png',
+            },
+            {
+                titleText: 'details',
+                imagePath: '../../components/images/function_icon/details.png',
+            },
+            {
+                titleText: 'Filter',
+                imagePath: '../../components/images/function_icon/filter.png',
+            },
+            {
+                titleText: 'up',
+                imagePath: '../../components/images/function_icon/up.png',
+            },
+            {
+                titleText: 'down',
+                imagePath: '../../components/images/function_icon/down.png',
+            },
+            {
+                titleText: 'More',
+                imagePath: '../../components/images/function_icon/more.png',
+            },
+            {
+                titleText: 'Refresh',
+                imagePath: '../../components/images/function_icon/refresh.png',
+            },
+            {
+                titleText: 'Search',
+                imagePath: '../../components/images/function_icon/search.png',
+            },
+            {
+                titleText: 'Phone',
+                imagePath: '../../components/images/function_icon/phone.png',
+            },
+            {
+                titleText: 'Task',
+                imagePath: '../../components/images/function_icon/Task.png',
+            },
+            {
+                titleText: 'Inspection',
+                imagePath: '../../components/images/function_icon/inspection.png',
+            },
+            {
+                titleText: 'Measuring room',
+                imagePath: '../../components/images/function_icon/measuring-room-small.png',
+            }
+        ]
+    }
+}
+</script>
+
+<style>
+.space{
+    height: 100px;
+    width: 100%;
+}
+</style>

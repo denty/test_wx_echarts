@@ -1,0 +1,68 @@
+<template disable-scroll="true">
+    <view class="baseListDetail">
+        <navigator class="cell">
+            <view class='solori'>
+                <view class='left'>{{BaseListDetail}}</view>
+                <view class='right'>
+                    <i>详细信息</i>
+                    <image src='http://shl-resource-public.oss-cn-hangzhou.aliyuncs.com/battlefury/right_icon.png'></image>
+                </view>
+            </view>
+        </navigator>
+    </view>
+</template>
+
+<script>
+    import wepy from 'wepy';
+    export default class BaseListDetail extends wepy.component {
+        props = {
+            // 父向子单向动态传值
+            BaseListDetail: {
+                type: String,
+                default: []
+            }
+        };
+    }
+
+</script>
+
+<style lang="css">
+    .baseListDetail{
+        width: 100%;
+        background: #FAFAFA;
+    }
+    .baseListDetail .cell{
+        background: #fff;
+        text-align: left;
+        font-size: 34rpx;
+        color: #333;
+        line-height: 48rpx;
+        margin-top: 20rpx;
+        display: block;
+        padding: 24rpx;
+    }
+    .baseListDetail .cell:last-child{
+        margin-bottom: 20rpx;
+    }
+    .baseListDetail .cell .solori{
+        overflow: hidden;
+    }
+    .baseListDetail .cell .solori .left{
+        float: left;
+    }
+    .baseListDetail .cell .solori .right{
+        overflow: hidden;
+        float: right;
+    }
+    .baseListDetail .cell .solori .right i{
+        color:#999;
+        font-size:32rpx;
+    }
+    .baseListDetail .cell .solori image{
+        width:16rpx;
+        height:26rpx;
+        float:right;
+        margin: 10rpx 0 0 10rpx;
+    }
+  
+</style>

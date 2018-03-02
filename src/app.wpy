@@ -1,0 +1,125 @@
+<style lang='less'>
+@import './style/weui.less';
+page {
+  background: #FAFAFA;
+  font-size: 16px;
+  font-family: -apple-system-font, Helvetica Neue, Helvetica, sans-serif;
+}
+.page__hd {
+  padding: 40px;
+}
+.page__bd {
+  padding-bottom: 40px;
+}
+.page__bd_spacing {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.page__ft {
+  padding-bottom: 10px;
+  text-align: center;
+}
+
+.page__title {
+  text-align: left;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.page__desc {
+  margin-top: 5px;
+  color: #888888;
+  text-align: left;
+  font-size: 14px;
+}
+</style>
+
+<script>
+import wepy from 'wepy';
+import 'wepy-async-function';
+
+export default class extends wepy.app {
+    config = {
+    // MARK: shl-components-demo
+        pages: [
+            'page/pie-chart-page',
+            'page/basic-components-page',
+            'page/chart-component-page',
+            'page/message-hints-page',
+            'page/price-page',
+            'page/assemble-components-page',
+            'page/marketing-component-page',
+            'page/fonts-size-page',
+            'page/color-page',
+            'page/list-page',
+            'page/button-page',
+            'page/functional-components-page',
+            'page/icons-page',
+            'page/head-portrait-page',
+            'page/progress-bar-page',
+            'page/label-page',
+            'page/step-progress-page',
+            'page/icon_sub_page/icon-sub-function-page',
+            'page/icon_sub_page/icon-sub-tab-page',
+            'page/icon_sub_page/icon-sub-hint-page',
+            'page/business-component-page',
+            'page/alert-page',
+            'page/error-page',
+            'page/login-page',
+            'page/image-edit-page',
+            'page/layout-page',
+            'page/filter-page',
+            'page/calender-page'
+        ],
+        window: {
+            navigationBarTextStyle: 'black',
+            navigationBarTitleText: 'WeUI in WePY',
+            navigationBarBackgroundColor: '#f8f8f8',
+            backgroundColor: '#f8f8f8'
+        },
+        networkTimeout: {
+            request: 10000,
+            connectSocket: 10000,
+            uploadFile: 10000,
+            downloadFile: 10000
+        },
+        tabBar: {
+            selectedColor: '#FEB34A',
+            color: '#333333',
+            list: [
+                {
+                    iconPath: './components/images/jichu_default.png',
+                    selectedIconPath: './components/images/jichu_selected.png',
+                    pagePath: 'page/basic-components-page',
+                    text: '基础组件'
+                },
+                {
+                    iconPath: './components/images/zuhe_default.png',
+                    selectedIconPath: './components/images/zuhe_selected.png',
+                    pagePath: 'page/assemble-components-page',
+                    text: '组合组件'
+                },
+                {
+                    iconPath: './components/images/yingxiao_default.png',
+                    selectedIconPath: './components/images/yingxiao_selected.png',
+                    pagePath: 'page/marketing-component-page',
+                    text: '营销组件'
+                },
+                {
+                    iconPath: './components/images/tubiao_default.png',
+                    selectedIconPath: './components/images/tubiao_selected.png',
+                    pagePath: 'page/chart-component-page',
+                    text: '图表组件'
+                }
+            ]
+        }
+    };
+
+    constructor() {
+        super();
+        this.use('promisify');
+        this.use('requestfix');
+    }
+}
+</script>

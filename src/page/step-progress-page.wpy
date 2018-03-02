@@ -1,0 +1,83 @@
+<template>
+    <view class="titleLabel">步骤进度</view>
+    <view class="list">
+        <view wx:for='{{stepProgressDataList}}' class="cell {{ item.isCheck === true ? 'cur' : ''}}">
+            <view class= "cellName" style="{{ item.isCheck === true ? 'color:#333333;' : 'color:#999999;'}}">{{item.name}}</view>
+            <view class= "cellTip">{{item.tip}}</view>
+            <view class="radiusBorder {{item.isCheck === true ? 'cur' : ''}}"></view>
+        </view>
+    </view>
+</template>
+
+<script>
+import wepy from 'wepy';
+export default class stepProgressPage extends wepy.page {
+    config = {
+        navigationBarTitleText: '步骤进度'
+    };
+    data= {
+        stepProgressDataList: [
+            {
+                name: '开工交底',
+                tip: '步骤一',
+                imagePath: '../components/images/function_icon/acceptance.png',
+                isCheck: true
+            },
+            {
+                name: '保护拆除',
+                tip: '步骤二',
+                imagePath: '../components/images/function_icon/acceptance.png',
+                isCheck: true
+            },
+            {
+                name: '水电施工',
+                tip: '步骤三',
+                imagePath: '../components/images/function_icon/acceptance.png',
+                isCheck: false
+            }
+        ]
+    }
+}
+</script>
+
+<style>
+.titleLabel{
+    margin: 20px 0 20px 20px;
+    font-size: 17px;
+    color: #333333
+}
+.list{
+    margin-left: 20px;
+}
+.cell{
+    border-left:1px solid #EBEBEB;
+    padding:0 0 60rpx 30rpx;
+    position:relative;
+}
+.cell.cur{
+    border-left:1px solid #FDA200;
+}
+.cellName{
+    font-size: 17px;
+    color: #333333;
+    line-height: 36rpx;
+    margin-bottom: 10rpx;
+}
+.cellTip{
+    color: #999999;
+    font-size: 12px;
+}
+.radiusBorder{
+    width:24rpx;
+    height:24rpx;
+    border-radius:50%;
+    border:1px solid #EBEBEB;
+    position: absolute;
+    top: 0;
+    background: #fff;
+    left: -7px;
+}
+.radiusBorder.cur{
+    border:1px solid #FDA200;
+}
+</style>

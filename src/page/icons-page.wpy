@@ -1,0 +1,43 @@
+<template>
+    <baseList :dataList.sync= "dataList" @callbackWithCell.user = "listCallBackActionWithCell"></baseList>
+</template>
+
+<script>
+import wepy from 'wepy';
+import BaseList from '../components/shl-components/base-list';
+export default class IconManagePage extends wepy.page {
+    config = {
+        navigationBarTitleText: '图标'
+    };
+    components = {
+        baseList: BaseList
+    };
+    data = {
+        dataList: [
+            {
+                title: '功能图标',
+                navigationUrl: 'icon_sub_page/icon-sub-function-page'
+            },
+            {
+                title: '底部tab图标',
+                navigationUrl: 'icon_sub_page/icon-sub-tab-page'
+            },
+            {
+                title: '辅助示意图标',
+                navigationUrl: 'icon_sub_page/icon-sub-hint-page'
+            }
+        ]
+    }
+    methods= {
+        listCallBackActionWithCell(cell) {
+            console.log(cell.title);
+            console.log(cell.navigationUrl);
+            this.$navigate(cell.navigationUrl);
+        }
+    }
+}
+</script>
+
+<style >
+
+</style>

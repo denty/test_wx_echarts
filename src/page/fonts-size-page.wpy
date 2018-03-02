@@ -1,0 +1,67 @@
+<template>
+   <view class='fonts-size-list'>
+        <view class='title'>使用系统默认字体，粗细根据页面具体情况选择</view>
+        <view class="one mb70">
+            <p class="title">常用字体大小为</p>
+            <p class="desc">60px  36px  34px  32px  28px  26px  24px</p>
+        </view>
+        <fontsSizeList :fontsList.sync= "fontsList">
+        </fontsSizeList>
+    </view>
+</template>
+
+<script>
+import wepy from 'wepy';
+import FontsSizeList from '../components/shl-components/fonts-size-list';
+export default class FontsSizePage extends wepy.page {
+    config = {
+        navigationBarTitleText: '字体'
+    };
+    components ={
+        fontsSizeList: FontsSizeList
+    }
+    data = {
+        fontsList: [
+            {
+                fontsSize: '60',
+                content: '字号60px',
+                desc: '只用于钱包的金额数字'
+            },
+            {
+                fontsSize: '36',
+                content: '字号36px',
+                desc: '一般用于导航栏，按钮文字'
+            },
+            {
+                fontsSize: '34',
+                content: '字号34px',
+                desc: '一般用于单行列表文字'
+            },
+            {
+                fontsSize: '32',
+                content: '字号32px',
+                desc: '一般用于单行列表，标题文字'
+            },
+            {
+                fontsSize: '28',
+                content: '字号28px',
+                desc: '一般用于正文文字，辅助说明性文字'
+            },
+            {
+                fontsSize: '26',
+                content: '字号26px',
+                desc: '说明性文字，排名页面'
+            },
+            {
+                fontsSize: '24',
+                content: '字号24px',
+                desc: '最小文字'
+            }
+        ]
+    }
+}
+</script>
+
+<style>
+
+</style>

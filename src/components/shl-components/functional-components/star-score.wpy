@@ -1,0 +1,140 @@
+<template>
+    <view class='star-score'>
+        <view class="bottom">
+            <view class="bian_star scoreOne">
+                <view class='starView' @tap="myStarChoose">
+                    <block wx:for="{{starMap}}">
+                        <view wx:if="{{star>=index+1}}" data-star="{{index+1}}"  class="zan-c-red star" ></view>
+                        <view wx:if="{{star<index+1}}" data-star="{{index+1}}" class="zan-c-gray-dark"></view>
+                    </block>
+                </view>  
+            </view>
+        </view> 
+    </view>
+</template>
+
+<script>
+    import wepy from 'wepy';
+    export default class StarScore extends wepy.component {
+        props = {
+            // 父向子单向动态传值
+            starMap: {
+                type: [Object],
+                default: []
+            },
+            star: {
+                type: Number,
+                default: null,
+            }
+        };
+        methods = {
+            myStarChoose(e) {
+                this.$emit('myStarChoose', e);
+            }
+        }
+    }
+
+</script>
+
+<style lang="css">
+    .star-score{
+        width: 100%;
+        overflow:hidden;
+        margin-bottom: 40rpx;
+    }
+   .bian_star{
+        overflow: hidden;
+    }
+    .bian_star .star_num{
+        color: #FFAC38;
+        text-align: center;
+        font-size: 24rpx;
+        margin: 30rpx 0 34rpx;
+    }
+    .bian_star .starView{
+        overflow: hidden;
+        position: relative;
+        height: 48rpx;
+        padding-left:24rpx;
+    }
+    .bian_star .tips{
+        font-size: 24rpx;
+        color: #999;
+        text-align: center;
+        margin-top: 40rpx;
+    }
+    .bian_star .starView view.star{
+        background-image: url(http://shl-resource-public.oss-cn-hangzhou.aliyuncs.com/xcx/1/star2.png);
+        background-repeat: no-repeat;
+    }
+    .bian_star .starView view{
+        float: left;
+        margin-right: 48rpx;
+        display: block;
+        width: 50rpx;
+        height: 48rpx;
+        background-size:100% 100%;
+        background-image: url(http://shl-resource-public.oss-cn-hangzhou.aliyuncs.com/xcx/1/star1.png);
+        background-repeat: no-repeat;
+    }
+    .bian_star .starView view:nth-child(5){
+        margin-right: 0;
+    }
+    .evaluation_label{
+        overflow: hidden;
+        width: 80%;
+        margin: 0 auto;
+    }
+    .evaluation_label view{
+        display: block;
+        color: #999;
+        border: 1px solid #D8D8D8;
+        font-size: 28rpx;
+        border-radius: 8rpx;
+        float: left;
+        line-height: 60rpx;
+        text-align: center;
+        margin-right: 8%;
+        width: 46%;
+        box-sizing: border-box;
+        margin-bottom: 30rpx;
+        font-weight: 300;
+    }
+    .evaluation_label view:nth-child(2n){
+        margin-right: 0;
+    }
+    .evaluation_label view.cur{
+        background: #FFAC38;
+        border: 1px solid #FFAC38;
+        color: #fff;
+    }
+    .content{
+        overflow: hidden;
+        width: 80%;
+        margin: 0 auto;
+    }
+    .content textarea{
+        color: #333;
+        font-size: 28rpx;
+        border: 1px solid #D8D8D8;
+        border-radius: 8rpx;
+        width: 100%;
+        resize: none;
+        box-sizing: border-box;
+        height: 184rpx;
+        padding: 20rpx;
+        outline: none;
+    }
+    .content textarea::-webkit-input-placeholder { /* WebKit browsers */
+        color: #E2E2E2;
+    }
+    .content textarea:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+        color: #E2E2E2;
+    }
+    .content textarea::-moz-placeholder { /* Mozilla Firefox 19+ */
+        color: #E2E2E2;
+    }
+    .content textarea:-ms-input-placeholder { /* Internet Explorer 10+ */
+        color: #E2E2E2;
+    }
+</style>

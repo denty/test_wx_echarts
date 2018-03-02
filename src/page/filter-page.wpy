@@ -1,0 +1,164 @@
+<template>
+    <view class="headerFilterView {{isFilter}}" animation="{{animationCoverData}}">
+        <view class="headerHolder" style="position: fixed; width: 100%; z-index:2">
+            <view class="title">筛选组件</view>
+            <view class="buttonHolder">
+                <filterButton class="filterButton" :buttonConstructor.sync="filterButtonConstructionObj" @touchUpInside.user="clickFilter"></filterButton>
+            </view>
+        </view>
+        <view class="title">筛选组件</view>
+            <view class="buttonHolder">
+                <filterButton class="filterButton" :buttonConstructor.sync="filterButtonConstructionObj" @touchUpInside.user="clickFilter"></filterButton>
+        </view>
+        <view class="filterDataHolder" animation="{{animationFilterListData}}" wx:if="{{isFilter}}">
+            <filterDataList :dataList.sync="dataList"></filterDataList>
+        </view>
+    </view>
+    <view style="height: 200px"></view>
+    <view class="buttonHolder" style="height: 100px; margin-top: 15px">
+        测试1
+    </view>
+    <view class="buttonHolder" style="height: 100px; margin-top: 15px">
+        测试2
+    </view>
+    <view class="buttonHolder" style="height: 100px; margin-top: 15px">
+        测试3
+    </view>
+    <view class="buttonHolder" style="height: 100px; margin-top: 15px">
+        测试4
+    </view>
+    <view class="buttonHolder" style="height: 100px; margin-top: 15px">
+        测试5
+    </view>
+    <view class="buttonHolder" style="height: 100px; margin-top: 15px">
+        测试6
+    </view>
+    <view class="buttonHolder" style="height: 100px; margin-top: 15px">
+        测试7
+    </view>
+</template>
+
+<script>
+    import wepy from 'wepy';
+    import SHLButton from '../components/shl-components/shl-button';
+    import BaseList from '../components/shl-components/base-list';
+    export default class FilterPage extends wepy.page {
+        config = {
+            navigationBarTitleText: '筛选页面'
+        };
+        components = {
+            filterButton: SHLButton,
+            filterDataList: BaseList
+        };
+        data = {
+            animationCoverData: '',
+            animationFilterListData: '',
+            isFilter: '',
+            filterButtonConstructionObj: {
+                type: 'infoButton',
+                title: '筛选',
+                enable: true
+            },
+            dataList: [
+                {
+                    title: '字体',
+                    navigationUrl: 'fonts-size-page'
+                },
+                {
+                    title: '颜色',
+                    navigationUrl: 'color-page'
+                },
+                {
+                    title: '消息提示',
+                    navigationUrl: 'message-hints-page'
+                },
+                {
+                    title: '按钮',
+                    navigationUrl: 'button-page'
+                },
+                {
+                    title: '列表',
+                    navigationUrl: 'list-page'
+                }
+            ]
+        };
+        methods = {
+            clickFilter() {
+                if (this.isFilter === '') {
+                    this.isFilter = 'isFilter-true';
+                    setTimeout(() => {
+                        let animationFilterList = wx.createAnimation({
+                            duration: 250,
+                            timingFunction: 'ease-in-out'
+                        });
+                        animationFilterList.translateY(490).step();
+                        this.animationFilterListData = animationFilterList.export();
+                        let animationCover = wx.createAnimation({
+                            duration: 250,
+                            timingFunction: 'ease-in-out'
+                        });
+                        animationCover.backgroundColor('rgba(0,0,0,0.6)').step();
+                        this.animationCoverData = animationCover.export();
+                        this.$apply();
+                    }, 30);
+                } else {
+                    setTimeout(() => {
+                        let animationCover = wx.createAnimation({
+                            duration: 250,
+                            timingFunction: 'ease-in-out'
+                        });
+                        animationCover.backgroundColor('rgba(0,0,0,0)').step();
+                        this.animationCoverData = animationCover.export();
+                        let animationFilterList = wx.createAnimation({
+                            duration: 250,
+                            timingFunction: 'ease-in-out'
+                        });
+                        animationFilterList.translateY(-490).step();
+                        this.animationFilterListData = animationFilterList.export();
+                        this.$apply();
+                        setTimeout(() => {
+                            this.isFilter = '';
+                            this.$apply();
+                        }, 250);
+                    }, 30);
+                }
+            }
+        };
+    }
+
+</script>
+
+<style>
+    .title {
+        margin: 0px;
+        background-color: white;
+    }
+
+    .filterButton {
+        margin: 0 15px;
+        height: 49px;
+        line-height: 49px;
+    }
+
+    .buttonHolder {
+        background-color: beige;
+        padding: 15px 0;
+    }
+
+    .headerFilterView {
+        position: fixed;
+        width: 100%;
+
+    }
+
+    .isFilter-true {
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0);
+    }
+
+    .filterDataHolder {
+        margin-top: -500px;
+        z-index: 1;
+    }
+
+</style>

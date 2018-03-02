@@ -1,0 +1,85 @@
+<template>
+    <view class="titleLabel"> 进度条 </view>
+    <view class="tipLabel"> 百分比 </view>
+    <firstProgressBar class="firstProgressBar" :progressConstructor.sync= "firstProgressBarConstructorData"></firstProgressBar>
+    <secondProgressBar class="secondProgressBar" :progressConstructor.sync= "secondProgressBarConstructorData"></secondProgressBar>
+    <thirdProgressBar class="thirdProgressBar" :progressConstructor.sync= "thirdProgressBarConstructorData"></thirdProgressBar>
+</template>
+
+<script>
+import wepy from 'wepy';
+import ProgressBar from '../components/shl-components/progress-bar';
+export default class progressBarPage extends wepy.page {
+    config = {
+        navigationBarTitleText: '进度条'
+    };
+    components = {
+        firstProgressBar: ProgressBar,
+        secondProgressBar: ProgressBar,
+        thirdProgressBar: ProgressBar
+    };
+    data= {
+        firstProgressBarConstructorData: {
+            percent: 0,
+            strokeWidth: 8,
+            backgroundColor: '#EEEEEE',
+            activeLineColor: [
+                '#FFD163'
+            ],
+            borderRadius: 5
+        },
+        secondProgressBarConstructorData: {
+            duration: 2,
+            percent: 40,
+            strokeWidth: 8,
+            backgroundColor: '#EEEEEE',
+            activeLineColor: [
+                '#FFD163'
+            ],
+            borderRadius: 5
+        },
+        thirdProgressBarConstructorData: {
+            duration: 2,
+            percent: 100,
+            strokeWidth: 8,
+            backgroundColor: '#EEEEEE',
+            activeLineColor: [
+                '#FFD163'
+            ],
+            borderRadius: 5
+
+        }
+    }
+}
+</script>
+
+<style>
+.titleLabel{
+    margin-left: 20px;
+    margin-top: 20px;
+    font-size: 17px;
+    color:#333333;
+}
+.tipLabel{
+    margin-left: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    color:#888888;
+}
+.firstProgressBar{
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 20px;
+}
+.secondProgressBar{
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 20px;
+}
+.thirdProgressBar{
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 20px;
+}
+</style>

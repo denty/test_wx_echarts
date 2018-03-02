@@ -1,0 +1,58 @@
+<template>
+    <view>
+        <image class="defaultImageFrame" src="{{imageObj.imagePath}}" model="aspectFill" bindload="imageLoad" style="width:{{ imageObj.image.width ? imageObj.image.width/2 : image.width/2 }}px; height:{{ imageObj.image.height ? imageObj.image.height/2 : image.height/2 }}px;"/>
+        <view class="defaultImageName" wx:if= "{{imageObj.name}}" >{{imageObj.name}}</view>
+    </view>
+</template>
+
+<script>
+import wepy from 'wepy';
+export default class OriginalFrameImage extends wepy.component {
+    props= {
+        imageObj: {
+            type: Object,
+            default: {
+                // MARK: 附加图片自适应属性
+                image: {
+                    width: 1,
+                    height: 2
+                }
+            }
+        }
+    };
+    data= {
+        image: {}
+    };
+    methods= {
+        imageLoad(el) {
+            console.log('图片名称:' + this.imageObj.imagePath + '宽度:' + el.detail.width + '高度:' + el.detail.height);
+            // this.image = {
+            //     width: Number(el.detail.width),
+            //     height: Number(el.detail.height)
+            // };
+            // MARK: 由于wepy的框架问题,本来自适应图片的frame数据应该保存在data中,现在放置在props中 wepy1.6
+            this.imageObj.image = {
+                width: Number(el.detail.width),
+                height: Number(el.detail.height)
+            };
+            this.image = {
+                width: Number(el.detail.width),
+                height: Number(el.detail.height)
+            };
+        },
+    };
+}
+</script>
+
+<style>
+.defaultImageFrame{
+    width: 1px;
+    height: 1px;
+}
+.defaultImageName{
+    margin-top: 10px;
+    text-align: center;
+    font-size: 14px;
+    color: #666666;
+}
+</style>

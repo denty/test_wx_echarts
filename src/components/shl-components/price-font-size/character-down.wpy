@@ -1,0 +1,29 @@
+<template>
+    <view class="characterDown"><i>¥</i>{{content}}</view>
+</template>
+
+<script>
+    import wepy from 'wepy';
+    export default class CharacterDown extends wepy.component {
+        props = {
+            // 父向子单向动态传值
+            content: {
+                type: String,
+                default: 'null'
+            }
+        }
+    }
+
+</script>
+
+<style lang="css">
+    .characterDown{
+       padding-left: 24rpx;
+       color: #333;
+       font-size: 34rpx;
+       line-height: 48rpx;
+    }
+    .characterDown i{
+        font-size: 20rpx;
+    }
+</style>

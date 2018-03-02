@@ -1,0 +1,59 @@
+<template>
+    <view class='tab'>
+        <view wx:for='{{tabList}}' class='tab-child'>
+            <i class="{{tabidx==item.id?'selectdborder':''}}"></i>
+            <view class="{{tabidx==item.id?'selectd':''}}" @tap='click({{item}})'>{{item.name}}</view>
+        </view>
+     </view>
+</template>
+
+<script>
+    import wepy from 'wepy';
+    export default class Tab extends wepy.component {
+        props = {
+            tabList: {
+                type: [Object],
+                default: []
+            },
+            tabidx: {
+                type: Number,
+                default: null
+            }
+        };
+        methods = {
+            click (item) {
+                this.$emit('tabSelected', item);
+            }
+        }
+    }
+
+</script>
+
+<style lang="css">
+    .tab{
+        width: 100%;
+        overflow:hidden;
+        background: #fff;
+        line-height: 94rpx;
+    }
+    .tab .tab-child{
+        float: left;
+        width: 25%;
+        color:#666;
+        font-size: 28rpx;
+        text-align: center;
+        position: relative;
+    }
+    .tab .tab-child .selectd{
+        color: #FFAC38
+    }
+    .tab .tab-child i.selectdborder{
+        display:block;
+        background:#FEB34A;
+        width:26%;
+        height:6rpx;
+        position:absolute;
+        bottom:0;
+        left:37%;
+    }
+</style>

@@ -1,0 +1,16 @@
+.title{
+    color: #333;
+    font-size: 34rpx;
+    line-height: 48rpx;
+    padding: 50rpx 0 30rpx 24rpx;
+}
+.mb40{
+    margin-bottom: 40rpx;
+}
+.small-title{
+    color: #888;
+    font-size: 28rpx;
+    line-height: 40rpx;
+    margin-bottom:10rpx;
+    padding-left: 24rpx;
+}

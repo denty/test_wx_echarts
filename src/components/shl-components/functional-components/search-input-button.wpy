@@ -1,0 +1,96 @@
+<template>
+    <view class='search-input-button'>
+        <view class='left'>
+            <icon type='search' size='15' class='search-icon'></icon> 
+            <input focus='{{ focus }}' confirm-type="search"  placeholder='请输入' name="search" value='{{ searchValue }}' @input = 'getInputSearchValue'></input>
+            <icon type='clear' size='15' class='clear-icon'></icon>
+        </view>
+        <view class='right'>
+            <view>搜索</view>
+        </view>
+     </view>
+</template>
+
+<script>
+    import wepy from 'wepy';
+    export default class SearchInputButton extends wepy.component {
+        data = {
+            focus: true
+        };
+        props = {
+            searchValue: {
+                type: String,
+                default: 'null'
+            }
+        };
+        methods = {
+            getInputSearchValue(e) {
+                this.$emit('getInputSearchValue', e.detail.value);
+            }
+        }
+    }
+
+</script>
+
+<style lang="css">
+    .search-input-button{
+        width: 100%;
+        overflow:hidden;
+        /* position:fixed;
+        top:0;
+        left:0;
+        z-index:3; */
+        /* height:70rpx; */
+        /* padding:30rpx 0; */
+    }
+    .search-input-button .left{
+        background:#fff;
+        width:72%;
+        height:70rpx;
+        overflow:hidden;
+        border-radius:5px;
+        margin-left:4%;
+        border:1px solid #E6E6EA;
+        box-sizing:border-box;
+        float:left;
+        color: #333;
+        font-size: 32rpx;
+        position: relative;
+    }
+    .search-input-button .left icon.search-icon{
+        float:left;
+        margin:20rpx 4% 0 2%;   
+    }
+    .search-input-button .left icon.clear-icon{
+        position: absolute;
+        top: 20rpx;
+        right: 2%;   
+    }
+    .search-input-button .left input{
+        float:left;
+        font-size:26rpx;
+        color:#333;
+        line-height:66rpx;
+        height:66rpx;
+        width:88%;
+    }
+    .search-input-button .right{
+        float:right;
+        margin-right:4%;
+        width: 15%;
+    }
+    .search-input-button .right view{
+        border:2rpx solid #E6E6EA;
+        background:#fff;
+        line-height:15%;
+        height:70rpx;
+        color:#FEB34A;
+        font-size:32rpx;
+        position:inherit;
+        padding:0;
+        line-height: 70rpx;
+        text-align:center;
+        border-radius:5px;
+        box-sizing: border-box;
+    }
+</style>

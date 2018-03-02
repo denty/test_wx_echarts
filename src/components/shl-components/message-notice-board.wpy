@@ -1,0 +1,100 @@
+
+<style lang="css">
+    .notice-board{
+        display: block;
+        overflow: hidden;
+        padding: 0 24rpx;
+        background: #FFF8D8;
+        border-top: 1px solid #FBF2C1;
+        border-bottom: 1px solid #FBF2C1;
+        height:70rpx;
+        line-height:70rpx;
+    }
+    .notice-board .notice-board-child{
+        display: block;
+        font-size: 26rpx;
+        color: #EEAC53;
+        white-space: nowrap;
+        overflow: hidden;
+        width:100%;
+    }
+    .notice-board .notice-board-child div{
+        overflow: hidden;
+        width:100%;
+    }
+    .container {height: 100%;display: flex;flex-direction: column;justify-content: space-between;box-sizing: border-box;}
+    .scrolltxt{
+        display: block;
+        overflow: hidden;
+        padding: 0 24rpx;
+        background: #FFF8D8;
+        border-top: 1px solid #FBF2C1;
+        border-bottom: 1px solid #FBF2C1;
+        height:70rpx;
+        line-height:70rpx;
+    }
+    .marquee_box {
+        position:relative;
+        color:#EEAC53;
+        height:70rpx;
+        line-height:70rpx;
+        display:block;
+        overflow:hidden;
+    } 
+    .marquee_text {
+        white-space: nowrap;
+        position:absolute;
+        top:0;
+        font-size:26rpx;
+        height:70rpx;
+        line-height:70rpx;
+    }
+</style>
+
+<template>
+    <scroll-view class="container">
+        <view class="scrolltxt">
+            <view class="marquee_box">
+            <view class="marquee_text" style="transform: translateX(-{{marqueeDistance}}px)">
+                <text>{{text}}</text>
+                <text style="margin-right:{{marquee_margin}}px;"></text>
+                <text style="margin-right:{{marquee_margin}}px;">{{text}}</text>        
+            </view>
+            </view>
+        </view>
+    </scroll-view>
+</template>
+
+<script>
+    import wepy from 'wepy';
+    export default class MessageNoticeBoard extends wepy.component {
+        props = {
+            // 父向子单向动态传值
+            text: {
+                type: String,
+                default: null
+            },
+            marqueePace: {
+                type: Number,
+                default: null
+            },
+            marqueeDistance: {
+                type: Number,
+                default: null
+            },
+            marquee_margin: {
+                type: Number,
+                default: null
+            },
+            size: {
+                type: Number,
+                default: null
+            },
+            interval: {
+                type: Number,
+                default: null
+            }
+        };
+    }
+
+</script>

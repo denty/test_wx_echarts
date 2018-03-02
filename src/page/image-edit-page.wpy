@@ -1,0 +1,191 @@
+<template>
+    <!-- <button>添加贴纸</button> -->
+    <view wx:if="{{!originImageFile}}">
+        <inputImageBtn class="full-button" :buttonConstructor.sync="inputImageButtonConstructor" @touchUpInside.user="chooseImage"></inputImageBtn>
+    </view>
+    <view>
+        <image class="image" wx:if="{{!imageSize && originImageFile}}" src="{{originImageFile}}" model="aspectFit" bindload="imageLoad"></image>
+        <movable-area wx:if="{{imageSize && originImageFile}}" style=" align-items: center; display: flex; flex-direction: column;height: auto;width: auto;background: clear;">
+            <image class="image" style="width:{{imageSize.width}}px; height:{{imageSize.height}}px;" src="{{originImageFile}}" model="aspectFill"
+                bindload="imageLoad"></image>
+            <!-- <movable-view direction="all" style="height: 50px; width: 50px; background: blue;">
+            </movable-view> -->
+            <movable-view direction="all" style="height: 100px; width: 100px;" wx:for='{{tagList}}' wx:key="{{index}}" data-idx="{{index}}">
+                <image style="width: 100px; height: 100px;" wx:if="{{item.type == 'loop'}}" src="../components/images/11.png"></image>
+                <textarea class="textarea" wx:if="{{item.type == 'text'}}" placeholder-style="color:white" placeholder="请输入..."></textarea>
+            </movable-view>
+        </movable-area>
+    </view>
+    <view class="button-holder" wx:if="{{imageSize && originImageFile && !isOpenLoop}}">
+        <!-- <cancelBtn class="function-button" :buttonConstructor.sync="cancelBtnConstructor" @touchUpInside.user=""></cancelBtn> -->
+        <addLoopBtn class="function-button" :buttonConstructor.sync="addLoopBtnConstructor" @touchUpInside.user="selectLoopAction"></addLoopBtn>
+        <addTextBtn class="function-button" :buttonConstructor.sync="addTextBtnConstructor" @touchUpInside.user="addTextAction"></addTextBtn>
+        <saveBtn class="function-button" :buttonConstructor.sync="saveBtnConstructor" @touchUpInside.user=""></saveBtn>
+    </view>
+    <view class="loop-holder" wx:if="{{imageSize && originImageFile && isOpenLoop}}">
+        <view style="width: 50px; height: 50px; margin-left: 40px; margin-right: 40px" bindtap="tapLoop1">
+            <image style="width: 50px; height: 50px;" src="../components/images/11.png"></image>
+        </view>
+        <view style="width: 50px; height: 50px;" bindtap="tapLoop2">
+            <image style="width: 50px; height: 50px;" src="../components/images/22.png"></image>
+        </view>
+    </view>
+</template>
+
+<script>
+    import wepy from 'wepy';
+    import SHLButton from '../components/shl-components/shl-button';
+    export default class ImageEditPage extends wepy.page {
+        config = {
+            navigationBarTitleText: '图片处理'
+        };
+        components = {
+            inputImageBtn: SHLButton,
+            cancelBtn: SHLButton,
+            addLoopBtn: SHLButton,
+            saveBtn: SHLButton,
+            addTextBtn: SHLButton
+        };
+        data = {
+            inputImageButtonConstructor: {
+                type: 'infoButton',
+                title: '添加图片',
+                enable: true
+            },
+            cancelBtnConstructor: {
+                type: 'nagetiveButton',
+                title: '撤销',
+                enable: true
+            },
+            addLoopBtnConstructor: {
+                type: 'infoButton',
+                title: '套索',
+                enable: true
+            },
+            addTextBtnConstructor: {
+                type: 'infoButton',
+                title: '文本',
+                enable: true
+            },
+            saveBtnConstructor: {
+                type: 'positiveButton',
+                title: '保存',
+                enable: true
+            },
+            originImageFile: '',
+            imageSize: '',
+            isOpenLoop: false,
+            tagList: []
+        }
+        methods = {
+            async chooseImage(el) {
+                let res = await wepy.chooseImage({
+                    sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+                    sourceType: ['album', 'camera'] // 可以指定来源是相册还是相机，默认二者都有
+                });
+                console.log(res.tempFilePaths);
+                this.originImageFile = res.tempFilePaths[0];
+                this.$apply();
+            },
+
+            selectLoopAction() {
+                this.isOpenLoop = true;
+            },
+
+            addTextAction() {
+                this.tagList.push({
+                    type: 'text',
+                });
+            },
+
+            imageLoad(el) {
+                console.log(el.detail);
+                var width = 1;
+                var height = 1;
+                console.log(wx.getSystemInfoSync().windowWidth);
+                console.log(wx.getSystemInfoSync().windowHeight);
+                if (el.detail.width / el.detail.height > wx.getSystemInfoSync().windowWidth / wx.getSystemInfoSync()
+                    .windowHeight) {
+                    width = wx.getSystemInfoSync().windowWidth * 2;
+                    height = width * el.detail.height / el.detail.width;
+                } else {
+                    height = wx.getSystemInfoSync().windowHeight * 2 - 150;
+                    width = height * el.detail.width / el.detail.height;
+                }
+                this.imageSize = {
+                    width: width / 2,
+                    height: height / 2
+                };
+                this.$apply();
+            }
+        }
+        tapLoop1() {
+            this.tagList.push({
+                type: 'loop',
+                imagePath: '../components/images/11.png'
+            });
+            console.log(this.tagList);
+            this.isOpenLoop = false;
+            this.$apply();
+        }
+
+        tapLoop2() {
+            this.tagList.push({
+                type: 'loop',
+                imagePath: '../components/images/22.png'
+            });
+            console.log(this.tagList);
+            this.isOpenLoop = false;
+            this.$apply();
+        }
+    }
+
+</script>
+
+<style>
+    .image {
+        width: 1px;
+        height: 1px;
+    }
+
+    .full-button {
+        height: 49px;
+        line-height: 49px;
+        margin-left: 20px;
+        margin-right: 20px;
+        margin-top: 100px;
+        margin-bottom: 10px;
+    }
+
+    .button-holder {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: row;
+        align-content: space-around;
+        height: 49px;
+    }
+
+    .loop-holder {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: row;
+        align-content: space-around;
+        height: 50px;
+    }
+
+    .function-button {
+        height: 49px;
+        width: 80px;
+        font-size: 14;
+        font-weight: 300;
+    }
+
+    .textarea {
+        width: 100px;
+        padding: 10px;
+        border-radius: 10px;
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+    }
+
+</style>

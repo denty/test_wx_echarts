@@ -1,0 +1,141 @@
+<template>
+    <view class='title'>标签</view>
+    <view class='mb40'></view>
+    <view class='small-title'>渠道</view>
+    <view class='mb40'></view>
+    <channel :channel.sync= 'channel'></channel>
+    <view class='mb40'></view>
+    <view class='small-title'>状态</view>
+    <view class='mb40'></view>
+    <state :state.sync= 'state'></state>
+    <view class='mb40'></view>
+    <orderOrderStateColor :orderStateColor.sync= 'orderStateColor'></orderOrderStateColor>
+    <view class='mb40'></view>
+    <view class='small-title'>选择</view>
+    <view class='mb40'></view>
+    <selectedState :selectedState.sync= 'selectedState' @seletcted.user= 'seletcted'></selectedState>
+</template>
+
+<script>
+import wepy from 'wepy';
+import Channel from '../components/shl-components/label/channel';
+import State from '../components/shl-components/label/state';
+import OrderOrderStateColor from '../components/shl-components/label/order-state-color';
+import SelectedState from '../components/shl-components/label/selected-state';
+export default class labelPage extends wepy.page {
+    config = {
+        navigationBarTitleText: '标签'
+    };
+    components ={
+        channel: Channel,
+        state: State,
+        orderOrderStateColor: OrderOrderStateColor,
+        selectedState: SelectedState
+    };
+    data = {
+        channel: [
+            {
+                type: 'border',
+                name: '百度'
+            },
+            {
+                type: 'border',
+                name: 'AM介绍'
+            },
+            {
+                type: 'border',
+                name: '大众点评'
+            },
+            {
+                type: '',
+                name: '百度'
+            },
+            {
+                type: '',
+                name: 'AM介绍'
+            },
+            {
+                type: '',
+                name: '大众点评'
+            }
+        ],
+        state: [
+            {
+                type: 'urgent',
+                name: '紧急'
+            },
+            {
+                type: 'noUrgent',
+                name: '不紧急'
+            },
+        ],
+        orderStateColor: [
+            {
+                color: 'wqy',
+                state: '未签约'
+            },
+            {
+                color: 'yqw',
+                state: '已签约'
+            },
+            {
+                color: 'ykg',
+                state: '已开工'
+            },
+            {
+                color: 'ywg',
+                state: '已完工'
+            },
+            {
+                color: 'yys',
+                state: '已验收'
+            },
+            {
+                color: 'yzf',
+                state: '已支付尾款'
+            },
+            {
+                color: 'yyq',
+                state: '已延期三天'
+            }
+        ],
+        selectedState: [
+            {
+                hasCheck: false,
+                title: '做事不认真',
+                id: 1,
+                class: 'wxz',
+            },
+            {
+                hasCheck: false,
+                title: '做事不认真',
+                id: 2,
+                class: 'wxz',
+            }
+        ]
+    };
+    methods = {
+        seletcted(item) {
+            let that = this;
+            let itemId = item.id;
+            let _biaoqianV = that.selectedState;
+            for (let i = 0; i < _biaoqianV.length; i++) {
+                if (_biaoqianV[i].id === itemId) {
+                    _biaoqianV[i].hasCheck = !_biaoqianV[i].hasCheck;
+                    if (_biaoqianV[i].hasCheck === true) {
+                        _biaoqianV[i].class = 'xz';
+                    } else {
+                        _biaoqianV[i].class = 'wxz';
+                    }
+
+                }
+            }
+            this.selectedState = _biaoqianV;
+        }
+    }
+}
+</script>
+
+<style type='css' src="../components/css/common.css">
+
+</style>

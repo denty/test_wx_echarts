@@ -1,0 +1,44 @@
+<template>
+    <view class="search-noButton">
+        <view class='search'>
+            <navigator url=''>
+                <icon type='search' size='15'></icon>
+                <view>搜索</view>
+            </navigator>
+        </view>
+    </view>
+</template>
+
+<script>
+    import wepy from 'wepy';
+    export default class SearchNoButton extends wepy.component {}
+
+</script>
+
+<style lang="css">
+    .search-noButton{
+        width: 100%;
+    }
+    .search-noButton .search{
+        background:#fff;
+        margin:16rpx auto;
+        width:92%;
+        border-radius:10rpx;
+        color:#B2B2B2;
+        font-size:26rpx;
+        text-align:center;
+        line-height:56rpx;
+        position:relative;
+        height:70rpx;
+        border:1px solid #E6E6EA;
+        box-sizing: border-box;
+     }
+     .search-noButton icon{
+        position:absolute;
+        top:22rpx;
+        margin-left:-70rpx;
+     }
+     .search-noButton view{
+         line-height: 70rpx;
+     }
+</style>

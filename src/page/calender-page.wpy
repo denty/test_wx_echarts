@@ -1,0 +1,24 @@
+<template>
+    <calender></calender>
+</template>
+
+<script>
+    import wepy from 'wepy';
+    import Calender from '../components/shl-components/calender-component';
+    export default class CalenderPage extends wepy.page {
+        config = {
+            navigationBarTitleText: '日历'
+        };
+        components = {
+            calender: Calender
+        };
+        data = {};
+        methods = {};
+    }
+
+</script>
+
+<style>
+
+
+</style>

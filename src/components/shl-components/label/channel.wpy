@@ -1,0 +1,45 @@
+<template>
+    <view class="channel">
+        <view wx:for='{{channel}}' class='{{item.type}}'>
+            {{item.name}}
+        </view>
+    </view>
+</template>
+
+<script>
+    import wepy from 'wepy';
+    export default class Channel extends wepy.component {
+        props = {
+            // 父向子单向动态传值
+            channel: {
+                type: [Object],
+                default: []
+            }
+        }
+    }
+
+</script>
+
+<style lang="css">
+    .channel{
+        width: 100%;
+        background: #FAFAFA;
+        padding: 0 24rpx;
+        overflow: hidden;
+    }
+    .channel view{
+        float: left;
+        border-radius: 10rpx;
+        font-size: 23rpx;
+        background: #3E6ED3;
+        color: #fff;
+        margin-right: 3%;
+        box-sizing: border-box;
+        padding:2px 4px;
+    }
+    .channel view.border{
+        background: none;
+        color: #3E6ED3;
+        border: 1px solid #3E6ED3;
+    }
+</style>

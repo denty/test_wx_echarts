@@ -1,0 +1,91 @@
+<template>
+    <baseList :dataList.sync= "dataList" @callbackWithCell.user = "listCallBackActionWithCell"></baseList>
+</template>
+
+<script>
+import wepy from 'wepy';
+import BaseList from '../components/shl-components/base-list';
+export default class AssembleComponentPage extends wepy.page {
+    config = {
+        navigationBarTitleText: '基础组件'
+    };
+    components = {
+        baseList: BaseList
+    };
+    data = {
+        dataList: [
+            {
+                title: '字体',
+                navigationUrl: 'fonts-size-page'
+            },
+            {
+                title: '颜色',
+                navigationUrl: 'color-page'
+            },
+            {
+                title: '消息提示',
+                navigationUrl: 'message-hints-page'
+            },
+            {
+                title: '按钮',
+                navigationUrl: 'button-page'
+            },
+            {
+                title: '列表',
+                navigationUrl: 'list-page'
+            },
+            {
+                title: '图标',
+                navigationUrl: 'icons-page'
+            },
+            {
+                title: '功能组件',
+                navigationUrl: 'functional-components-page'
+            },
+            {
+                title: '头像',
+                navigationUrl: 'head-portrait-page'
+            },
+            {
+                title: '标签',
+                navigationUrl: 'label-page'
+            },
+            {
+                title: '进度条',
+                navigationUrl: 'progress-bar-page'
+            },
+            {
+                title: '价格',
+                navigationUrl: 'price-page'
+            },
+            {
+                title: '步骤进度',
+                navigationUrl: 'step-progress-page'
+            },
+            {
+                title: '布局组件',
+                navigationUrl: 'layout-page'
+            },
+            {
+                title: '筛选组件',
+                navigationUrl: 'filter-page'
+            },
+            {
+                title: '日历组件',
+                navigationUrl: 'calender-page'
+            }
+        ]
+    }
+    methods= {
+        listCallBackActionWithCell(cell) {
+            console.log(cell.title);
+            console.log(cell.navigationUrl);
+            this.$navigate(cell.navigationUrl);
+        }
+    }
+}
+</script>
+
+<style>
+
+</style>

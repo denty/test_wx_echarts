@@ -1,0 +1,46 @@
+<template>
+    <view>
+        <view style="display: flex;">
+            <view class="indicate"></view>
+            <view class="section-text">{{sectionTitle}}</view>
+        </view>
+        <view class="part-line"></view>
+    </view>
+</template>
+
+<script>
+import wepy from 'wepy';
+export default class SectionHeader extends wepy.component {
+    props={
+        sectionTitle: {
+            type: String,
+            default: '标题名称'
+        }
+    }
+}
+</script>
+
+<style>
+.section-text{
+    margin-bottom: 10px;
+    font-size: 17px;
+    font: bold;
+}
+.part-line{
+    height: 1px;
+    width: 100%;
+    background-color: #ECECEC;
+}
+.indicate{
+    border: lightgrey;
+    border-style: solid;
+    border-width: 0px;
+    border-radius: 3px;
+    margin-left: 15px;
+    margin-right: 10px;
+    margin-top: 6px;
+    height: 12px;
+    width: 3.5px;
+    background-color: #FFAC38;
+}
+</style>

@@ -1,0 +1,91 @@
+<template>
+    <view class = 'grid_view'>
+        <repeat for="{{dataList}}" key="index" index="index" item="item">
+            <view class = 'grid_cell'>
+                <view class = 'cycle_background' style='background-color:{{item.colorText}}' wx:if="{{item.colorText}}"></view>
+                <originalImage wx:if="{{item.imagePath}}" :imageObj.sync= "item"></originalImage>
+                <view class = 'title_label'>
+                    {{item.colorText}}
+                </view>
+                <view class = 'subtitle_label'>
+                    {{item.titleText}}
+                </view>
+                <view class = 'tip_label'>
+                    {{item.tipText}}
+                </view>
+            </view>
+        </repeat>
+    </view>
+</template>
+
+<script>
+import wepy from 'wepy';
+import OriginalImage from '../shl-components/original-frame-image';
+/** 使用说明
+传递参数:dataList
+dataList:[
+    {
+        titleText: '标题名称,
+        imagePath: '图片路径',
+        tipText: '副标题',
+        colorText: '背景颜色RGB'
+    }
+]
+*/
+export default class GirdView extends wepy.component {
+    props={
+        dataList: {
+            type: [Object],
+            default: []
+        }
+    }
+
+    components= {
+        originalImage: OriginalImage,
+    }
+
+    installCycleColor(colorCode) {
+        var styleColor = 'background-color:#ffff';
+        return styleColor;
+    }
+}
+</script>
+
+<style>
+.grid_cell{
+    width: 33%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    box-sizing: border-box;
+    padding-top: 10px
+}
+.grid_view{
+    display:flex;
+    flex-wrap: wrap;
+    width:100%;
+}
+.cycle_background{
+    height: 80px;
+    width: 80px;
+    box-sizing: content-box;
+    align-items: center;
+    justify-content: center;
+    background-color: aqua;
+    border-radius: 50%
+}
+.title_label{
+    padding: 5px;
+    height: 12px;
+}
+.subtitle_label{
+    padding: 5px;
+    height: 12px;
+}
+.tip_label{
+    padding: 5px;
+    height: 12px;
+}
+</style>

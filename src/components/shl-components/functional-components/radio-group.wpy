@@ -1,0 +1,50 @@
+<template>
+    <view  class='radio-group'>
+        <radio-group class="radio-group">
+            <label class="radio" wx:for="{{radioGroup}}">
+                <radio @tap='click({{item}})' value="{{item.name}}" checked="{{item.checked}}" color='orange'/>{{item.value}}
+            </label>
+        </radio-group>
+     </view>
+</template>
+
+<script>
+    import wepy from 'wepy';
+    export default class RadioGroup extends wepy.component {
+        props = {
+            // 父向子单向动态传值
+            radioGroup: {
+                type: [Object],
+                default: []
+            }
+        };
+        methods = {
+            click(item) {
+                this.$emit('callbackWithCell', item);
+            }
+        }
+    }
+
+</script>
+
+<style lang="css">
+    .radio-group{
+        width: 100%;
+        overflow:hidden;
+        background: #fff;
+    }
+   .radio-group label{
+        display:block;
+        border-bottom:1px solid #ECECEC;
+        padding:24rpx 24rpx 24rpx 0;
+        margin-left:24rpx;
+        font-size:34rpx;
+        color:#333;
+   }
+   .radio-group label:last-child{
+       border:none;
+   }
+   .radio-group label radio{
+       float: right;
+   }
+</style>

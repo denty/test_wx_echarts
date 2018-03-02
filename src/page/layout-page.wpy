@@ -1,0 +1,27 @@
+<template>
+    <wingBlank>
+        <view class="blank">组件</view>
+    </wingBlank>
+</template>
+
+<script>
+    import wepy from 'wepy';
+    import WingBlank from '../components/shl-components/layout-components/wing-blank';
+    export default class LayoutPage extends wepy.page {
+        config = {
+            navigationBarTitleText: '布局组建'
+        };
+        components = {
+            wingBlank: WingBlank,
+        };
+        data = {};
+        methods = {};
+    }
+</script>
+
+<style>
+    .blank{
+        background-color: gray;
+        color: white;
+    }
+</style>

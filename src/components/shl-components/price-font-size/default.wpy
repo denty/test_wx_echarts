@@ -1,0 +1,26 @@
+<template>
+    <view class="default">¥{{content}}</view>
+</template>
+
+<script>
+    import wepy from 'wepy';
+    export default class Default extends wepy.component {
+        props = {
+            // 父向子单向动态传值
+            content: {
+                type: String,
+                default: 'null'
+            }
+        }
+    }
+
+</script>
+
+<style lang="css">
+    .default{
+       padding-left: 24rpx;
+       color: #333;
+       font-size: 34rpx;
+       line-height: 48rpx;
+    }
+</style>

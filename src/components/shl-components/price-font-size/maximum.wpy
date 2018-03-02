@@ -1,0 +1,26 @@
+<template>
+    <view class="maximum">¥{{content}}</view>
+</template>
+
+<script>
+    import wepy from 'wepy';
+    export default class Maximum extends wepy.component {
+        props = {
+            // 父向子单向动态传值
+            content: {
+                type: String,
+                default: 'null'
+            }
+        }
+    }
+
+</script>
+
+<style lang="css">
+    .maximum{
+       padding-left: 24rpx;
+       color: #333;
+       font-size: 60rpx;
+       line-height: 84rpx;
+    }
+</style>

@@ -1,0 +1,59 @@
+<template disable-scroll="true">
+    <view class="list">
+        <view wx:for='{{dataList}}' class="cell">
+            <view @tap="click({{item}})" class='solori'>{{item.title}}
+                <image src='http://shl-resource-public.oss-cn-hangzhou.aliyuncs.com/battlefury/right_icon.png'></image>
+            </view>
+        </view>
+    </view>
+</template>
+
+<script>
+    import wepy from 'wepy';
+    export default class BaseList extends wepy.component {
+        props = {
+            // 父向子单向动态传值
+            dataList: {
+                type: [Object],
+                default: []
+            }
+        };
+
+        methods= {
+            click(item) {
+                this.$emit('callbackWithCell', item);
+            }
+        };
+    }
+
+</script>
+
+<style lang="css">
+  .list{
+    width: 100%;
+    background: #FAFAFA;
+  }
+  .list .cell{
+    background: #fff;
+    text-align: left;
+    font-size: 34rpx;
+    color: #333;
+    line-height: 48rpx;
+    margin-top: 20rpx;
+    display: block;
+    padding: 24rpx;
+  }
+  .list .cell:last-child{
+    margin-bottom: 20rpx;
+  }
+  .list .cell .solori{
+      overflow: hidden;
+  }
+  .list .cell .solori image{
+    width:16rpx;
+    height:26rpx;
+    float:right;
+    margin-top: 10rpx;
+  }
+  
+</style>

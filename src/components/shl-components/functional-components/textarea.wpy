@@ -1,0 +1,41 @@
+<template>
+    <view class='textarea'>
+        <textarea placeholder-style="color:#999" placeholder="请输入..." @input = 'getTextareaValue' value='{{textareaValue}}'></textarea>
+    </view>
+</template>
+
+<script>
+    import wepy from 'wepy';
+    export default class Textarea extends wepy.component {
+        props = {
+            textareaValue: {
+                type: String,
+                default: 'null'
+            },
+        };
+        methods = {
+            getTextareaValue(e) {
+                this.$emit('getTextareaValue', e.detail.value);
+            }
+        }
+    }
+
+</script>
+
+<style lang="css">
+    .textarea{
+        width: 100%;
+        overflow:hidden;
+        background: #fff;
+        height: 150rpx;
+        padding: 0 24rpx;
+    }
+    .textarea textarea{
+        font-size: 34rpx;
+        color: #333;
+        display: block;
+        height: 150rpx;
+    }
+   
+   
+</style>

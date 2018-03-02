@@ -1,0 +1,201 @@
+<template>
+    <view>
+        <firstGirdView :dataList.sync= "firstGirdViewDataList"></firstGirdView>
+        <secondGirdView :dataList.sync= "secondGirdViewDataList"></secondGirdView>
+        <thirdGirdView :dataList.sync= "thirdGirdViewDataList"></thirdGirdView>
+        <stampGirdView :dataList.sync= "stampGirdViewDataList"></stampGirdView>
+    </view>
+    
+    <view class="space">
+        <successOriginalImage class="singleImage" :imageObj.sync= "successOriginalImageObj"></successOriginalImage>
+        <warningOriginalImage class="singleImage" :imageObj.sync= "warningOriginalImageObj"></warningOriginalImage>
+    </view>
+</template>
+
+<script>
+import wepy from 'wepy';
+import GirdView from '../../components/shl-components/gird-view';
+import OriginalFrameImage from '../../components/shl-components/original-frame-image';
+export default class IconSubHintPage extends wepy.page {
+    config = {
+        navigationBarTitleText: '图标'
+    };
+    components= {
+        successOriginalImage: OriginalFrameImage,
+        warningOriginalImage: OriginalFrameImage,
+        firstGirdView: GirdView,
+        secondGirdView: GirdView,
+        thirdGirdView: GirdView,
+        stampGirdView: GirdView
+    };
+
+    data= {
+        firstGirdViewDataList: [
+            {
+                titleText: 'Data',
+                imagePath: '../../components/images/hint_icon/data.png',
+            },
+            {
+                titleText: 'Ranking',
+                imagePath: '../../components/images/hint_icon/ranking.png',
+            },
+            {
+                titleText: 'Statistics',
+                imagePath: '../../components/images/hint_icon/statistics.png',
+            },
+            {
+                titleText: 'Wallet',
+                imagePath: '../../components/images/hint_icon/wallet.png',
+            },
+            {
+                titleText: 'System',
+                imagePath: '../../components/images/hint_icon/system.png',
+            },
+            {
+                titleText: 'Add',
+                imagePath: '../../components/images/hint_icon/add.png',
+            },
+            {
+                titleText: 'Leave',
+                imagePath: '../../components/images/hint_icon/leave.png',
+            },
+            {
+                titleText: 'worker',
+                imagePath: '../../components/images/hint_icon/worker.png',
+            },
+            {
+                titleText: 'Star',
+                imagePath: '../../components/images/hint_icon/star.png',
+            }
+        ],
+        secondGirdViewDataList: [
+            {
+                titleText: 'Order',
+                imagePath: '../../components/images/hint_icon/order_hollow.png',
+            },
+            {
+                titleText: 'Address',
+                imagePath: '../../components/images/hint_icon/address_hollow.png',
+            },
+            {
+                titleText: 'AM',
+                imagePath: '../../components/images/hint_icon/AM_hollow.png',
+            },
+            {
+                titleText: 'Chief',
+                imagePath: '../../components/images/hint_icon/chief_hollow.png',
+            },
+            {
+                titleText: 'Time',
+                imagePath: '../../components/images/hint_icon/time_hollow.png',
+            },
+            {
+                titleText: 'Position',
+                imagePath: '../../components/images/hint_icon/position_hollow.png',
+            },
+            {
+                titleText: 'Worker',
+                imagePath: '../../components/images/hint_icon/worker_hollow.png',
+            },
+            {
+                titleText: 'Amount',
+                imagePath: '../../components/images/hint_icon/amount_hollow.png',
+            },
+            {
+                titleText: 'Housekeeper',
+                imagePath: '../../components/images/hint_icon/housekeeper_hollow.png',
+            }
+        ],
+        thirdGirdViewDataList: [
+            {
+                titleText: 'Description',
+                imagePath: '../../components/images/hint_icon/description_hollow.png',
+            },
+            {
+                titleText: 'Subtasks',
+                imagePath: '../../components/images/hint_icon/subtasks_hollow.png',
+            },
+            {
+                titleText: 'Subtasks',
+                imagePath: '../../components/images/hint_icon/subtasks_row_hollow.png',
+            },
+            {
+                titleText: 'Result',
+                imagePath: '../../components/images/hint_icon/result_hollow.png',
+            },
+            {
+                titleText: 'Message',
+                imagePath: '../../components/images/hint_icon/message_hollow.png',
+            },
+            {
+                titleText: 'drop out',
+                imagePath: '../../components/images/hint_icon/drop_out_hollow.png',
+            },
+            {
+                titleText: 'Order',
+                imagePath: '../../components/images/hint_icon/order_large_hollow.png',
+            },
+            {
+                titleText: 'Calendar',
+                imagePath: '../../components/images/hint_icon/calendar_hollow.png',
+            },
+            {
+                titleText: 'Onwer',
+                imagePath: '../../components/images/hint_icon/order_hollow.png',
+            },
+            {
+                titleText: 'Payment',
+                imagePath: '../../components/images/hint_icon/payment_hollow.png',
+            },
+            {
+                titleText: 'Picture',
+                imagePath: '../../components/images/hint_icon/picture_hollow.png',
+            },
+            {
+                titleText: 'Quote',
+                imagePath: '../../components/images/hint_icon/quote_hollow.png',
+            },
+            {
+                titleText: 'Star',
+                imagePath: '../../components/images/hint_icon/star_hollow.png',
+            },
+        ],
+        stampGirdViewDataList: [
+            {
+                titleText: 'Checked in',
+                imagePath: '../../components/images/hint_icon/checked_in_stamp.png',
+            },
+            {
+                titleText: 'Completed',
+                imagePath: '../../components/images/hint_icon/completed_stamp.png',
+            },
+            {
+                titleText: 'Uploaded',
+                imagePath: '../../components/images/hint_icon/uploaded_stamp.png',
+            },
+        ],
+        successOriginalImageObj: {
+            imagePath: '../../components/images/hint_icon/success_icon_big.png',
+            name: 'Success'
+        },
+        warningOriginalImageObj: {
+            imagePath: '../../components/images/hint_icon/warning_icon_big.png',
+            name: 'warning'
+        }
+    }
+}
+</script>
+
+<style>
+.space{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+.singleImage{
+    margin-left: 20px;
+    margin-right: 20px;
+}
+</style>

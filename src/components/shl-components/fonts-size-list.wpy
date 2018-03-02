@@ -1,0 +1,79 @@
+
+<style lang="css">
+    view{
+        display: block;
+    }
+    p{
+        display: block;
+    }
+    .fonts-size-list{
+        width: 94%;
+        margin: 0 auto;
+        display: block;
+    }
+    .fonts-size-list .title{
+        color: #666;
+        font-size: 24rpx;
+        padding: 60rpx 0;
+    }
+    .t-y-p{
+        color: #999;
+        font-size: 24rpx
+    }
+    .fonts-size-list .one .title{
+        color: #666;
+        font-size: 28rpx;
+        padding: 0;
+    }
+    .fonts-size-list .one .desc{
+        font-size: 28rpx;
+        color: #333;
+    }
+    .mb70{
+        margin-bottom: 70rpx;
+    }
+    .color333{
+        color: #333;
+    }
+    .t-y-view .fs60{
+        font-size: 60rpx;
+    }
+    .t-y-view .fs36{
+        font-size: 36rpx;
+    }
+    .t-y-view .fs34{
+        font-size: 34rpx;
+    }
+    .t-y-view .fs32{
+        font-size: 32rpx;
+    }
+    .t-y-view .fs28{
+        font-size: 28rpx;
+    }
+    .t-y-view .fs26{
+        font-size: 26rpx;
+    }
+    .t-y-view .fs24{
+        font-size: 24rpx;
+    }
+</style>
+<template>
+   
+    <view class="t-y-view mb70" wx:for='{{fontsList}}'>
+        <p class="color333 fs{{item.fontsSize}}">{{item.content}}</p>
+        <p class="t-y-p">{{item.desc}}</p>
+    </view>
+</template>
+
+<script>
+    import wepy from 'wepy';
+    export default class FontsSizeList extends wepy.component {
+        props = {
+            fontsList: {
+                type: [Object],
+                default: []
+            }
+        };
+    }
+
+</script>

@@ -1,0 +1,76 @@
+
+<style lang="css">
+    .messageDiv{
+        display: block;
+        overflow: hidden;
+        padding: 0 24rpx;
+    }
+    .back-pic{
+        display:block;
+        overflow:hidden;
+        float:left;
+        width:25%;
+        text-align: center;
+    }
+    .back-pic .back-pic-child{
+        display:block;
+        position:relative;
+        padding-top:7%;
+    }
+    .back-pic image{
+        width: 88rpx;
+        height: 88rpx;
+        display:block;
+    }
+    .back-pic i{
+        display: block;
+        width: 30rpx;
+        height: 30rpx;
+        color: #fff;
+        font-size: 20rpx;
+        background: #E64340;
+        border-radius: 50%;
+        position: absolute;
+        right: 28%;
+        top: 0;
+        line-height:30rpx;
+        text-align:center;
+    }
+    .back-pic i.threeMore{
+        border-radius: 30rpx;
+        width: 52rpx;
+    }
+    .back-pic i.twoNumber{
+        width: 34rpx;
+    }
+</style>
+
+<template>
+    <div class="messageDiv">
+        <div class="back-pic" wx:for='{{messageHints}}'>
+            <div class="back-pic-child" @tap='click({{item}})'>
+                <i class="red-point {{item.number > 99?'threeMore':''}}{{item.number > 9?'twoNumber':''}}">{{item.number}}</i>
+                <image src='{{item.imgUrl}}'></image>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+    import wepy from 'wepy';
+    export default class MessageHints extends wepy.component {
+        props = {
+            // 父向子单向动态传值
+            messageHints: {
+                type: [Object],
+                default: []
+            }
+        };
+        methods = {
+            click(item) {
+                this.$emit('callbackWithCell', item);
+            }
+        }
+    }
+
+</script>

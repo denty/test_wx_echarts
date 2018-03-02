@@ -1,0 +1,51 @@
+<template>
+    <baseList :dataList.sync= "dataList" @callbackWithCell.user = "listCallBackActionWithCell"></baseList>
+</template>
+
+<script>
+import wepy from 'wepy';
+import BaseList from '../components/shl-components/base-list';
+export default class BasicComponentPage extends wepy.page {
+    config = {
+        navigationBarTitleText: '组合组件'
+    };
+    components = {
+        baseList: BaseList
+    };
+    data = {
+        dataList: [
+            {
+                title: '内容组件',
+                navigationUrl: 'business-component-page'
+            },
+            {
+                title: '反馈／提示／弹窗',
+                navigationUrl: 'alert-page'
+            },
+            {
+                title: '空状态',
+                navigationUrl: 'error-page'
+            },
+            {
+                title: '登录',
+                navigationUrl: 'login-page'
+            },
+            {
+                title: '图片处理',
+                navigationUrl: 'image-edit-page'
+            }
+        ]
+    }
+    methods= {
+        listCallBackActionWithCell(cell) {
+            console.log(cell.title);
+            console.log(cell.navigationUrl);
+            this.$navigate(cell.navigationUrl);
+        }
+    }
+}
+</script>
+
+<style>
+
+</style>

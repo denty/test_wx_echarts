@@ -1,0 +1,49 @@
+<template>
+    <view class="selectedState">
+        <view wx:for='{{selectedState}}' @tap='click({{item}})' class='{{item.class}}'>
+            {{item.title}}
+        </view>
+    </view>
+</template>
+
+<script>
+    import wepy from 'wepy';
+    export default class SelectedState extends wepy.component {
+        props = {
+            // 父向子单向动态传值
+            selectedState: {
+                type: [Object],
+                default: []
+            }
+        };
+        methods= {
+            click(item) {
+                this.$emit('seletcted', item);
+            }
+        };
+    }
+
+</script>
+
+<style lang="css">
+    .selectedState{
+        width: 100%;
+        background: #FAFAFA;
+        padding: 0 24rpx;
+        overflow: hidden;
+    }
+    .selectedState view{
+        float:left;
+        font-size:28rpx;
+        margin:0 3% 0 0;
+        border:1px solid #D8D8D8;
+        color:#999999;
+        border-radius:5px;
+        padding:5rpx 10rpx;
+    }
+    .selectedState view.xz{
+        color: #fff;
+        background: #F4A436;
+        border: 1px solid #F4A436;
+    }
+</style>

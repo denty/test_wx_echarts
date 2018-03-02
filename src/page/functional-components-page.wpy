@@ -1,0 +1,157 @@
+<template>
+    <view class='title'>搜索</view>
+    <searchNoButton></searchNoButton>
+    <view class='mb40'></view>
+    <searchInputButton :searchValue.sync= 'searchValue' @getInputSearchValue.user = 'getInputSearchValue'></searchInputButton>
+    <view class='title'>选择</view>
+    <view class='small-title'>单选</view>
+    <radioGroup :radioGroup.sync= "radioGroup" @callbackWithCell.user = "listCallBackActionWithCell"></radioGroup>
+    <view class='mb40'></view>
+    <view class='small-title'>多选</view>
+    <checkboxGroup :CheckboxGroup.sync= 'CheckboxGroup' @checkBoxCallbackWithCell.user = "checkBoxBackActionWithCell"></checkboxGroup>
+    <view class='mb40'></view>
+    <datePicker></datePicker>
+    <view class='mb40'></view>
+    <ordinaryPicker :OrdinaryPicker.sync= 'OrdinaryPicker' :index.sync= 'index' @OrdinaryPicker.user = "OrdinaryPickerChange"></ordinaryPicker>
+    <view class='mb40'></view>
+    <view class='title'>TAB</view>
+    <tab :tabList.sync= 'tabList' :tabidx.sync= 'tabidx' @tabSelected.user = "tabSelected"></tab>
+    <view class='mb40'></view>
+    <view class='title'>输入／添加</view>
+    <view class='small-title'>单行输入</view>
+    <inputSingular :inputValue.sync= 'inputValue' @getInputValue.user = 'getInputValue'></inputSingular>
+    <view class='mb40'></view>
+    <inputBeltTitle :inputLeftTitle.sync= 'inputLeftTitle' :inputBeltValue.sync= 'inputBeltValue' @getInputBeltValue.user = 'getInputBeltValue'></inputBeltTitle>
+    <view class='mb40'></view>
+    <view class='small-title'>多行输入</view>
+    <textarea :textareaValue.syne= 'textareaValue' @getTextareaValue.user = 'getTextareaValue'></textarea>
+    <view class='mb40'></view>
+    <view class='small-title'>添加图片</view>
+    <uploadImage></uploadImage>
+    <view class='mb40'></view>
+    <view class='mb40'></view>
+    <view class='title'>评分</view>
+   <starScore :starMap.sync= 'starMap' :star.sync= 'star' @myStarChoose.user = 'myStarChoose'></starScore>
+</template>
+
+<script>
+import wepy from 'wepy';
+import SearchNoButton from '../components/shl-components/functional-components/search-noButton';
+import SearchInputButton from '../components/shl-components/functional-components/search-input-button';
+import RadioGroup from '../components/shl-components/functional-components/radio-group';
+import CheckboxGroup from '../components/shl-components/functional-components/checkbox-group';
+import DatePicker from '../components/shl-components/functional-components/date-picker';
+import OrdinaryPicker from '../components/shl-components/functional-components/ordinary-picker';
+import Tab from '../components/shl-components/functional-components/tab';
+import InputSingular from '../components/shl-components/functional-components/input-Singular';
+import InputBeltTitle from '../components/shl-components/functional-components/input-belt-title';
+import Textarea from '../components/shl-components/functional-components/textarea';
+import UploadImage from '../components/shl-components/functional-components/upload-image';
+import StarScore from '../components/shl-components/functional-components/star-score';
+export default class functionalComponentsPage extends wepy.page {
+    config = {
+        navigationBarTitleText: '功能组件'
+    };
+    components ={
+        searchNoButton: SearchNoButton,
+        searchInputButton: SearchInputButton,
+        radioGroup: RadioGroup,
+        checkboxGroup: CheckboxGroup,
+        datePicker: DatePicker,
+        ordinaryPicker: OrdinaryPicker,
+        tab: Tab,
+        inputSingular: InputSingular,
+        inputBeltTitle: InputBeltTitle,
+        textarea: Textarea,
+        uploadImage: UploadImage,
+        starScore: StarScore
+    }
+    data = {
+        searchValue: '',
+        radioGroup: [
+            {name: '有人', value: '有人', checked: 'true'},
+            {name: '无人', value: '无人'},
+        ],
+        CheckboxGroup: [
+            {name: '小工', value: '小工', checked: 'true'},
+            {name: '技术工', value: '技术工'},
+            {name: '水电工', value: '水电工'}
+        ],
+        OrdinaryPicker: ['美国', '中国', '巴西', '日本'],
+        index: null,
+        tabidx: 1,
+        tabList: [
+            {
+                id: 1,
+                name: '今日开工',
+                selected: true
+            },
+            {
+                id: 2,
+                name: '明日开工',
+                selected: false
+            },
+            {
+                id: 3,
+                name: '未来一周开工',
+                selected: false
+            },
+            {
+                id: 4,
+                name: '全部',
+                selected: false
+            }
+        ],
+        inputValue: '',
+        inputLeftTitle: '单项输入',
+        inputBeltValue: '',
+        textareaValue: '111',
+        star: 0,
+        starMap: [
+            '非常差',
+            '差',
+            '一般',
+            '好',
+            '非常好',
+        ]
+    }
+    methods = {
+        getInputSearchValue(cell) {
+            console.log(cell);
+            this.searchValue = cell;
+        },
+        listCallBackActionWithCell(cell) {
+            console.log(cell);
+        },
+        checkBoxBackActionWithCell (cell) {
+            console.log(cell);
+        },
+        OrdinaryPickerChange (cell) {
+            console.log(cell);
+            this.index = cell;
+        },
+        tabSelected (cell) {
+            console.log(cell.id);
+            this.tabidx = cell.id;
+        },
+        getInputValue(cell) {
+            console.log(cell);
+            this.inputValue = cell;
+        },
+        getInputBeltValue (cell) {
+            console.log(cell);
+        },
+        getTextareaValue (cell) {
+            console.log(cell);
+        },
+        myStarChoose (cell) {
+            let star = parseInt(cell.target.dataset.star) || 0;
+            this.star = star;
+        }
+    }
+}
+</script>
+
+<style type="css" src="../components/css/common.css">
+
+</style>

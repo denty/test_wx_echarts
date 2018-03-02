@@ -1,0 +1,93 @@
+<template>
+    <view>
+        <girdViewOne :dataList.sync= "colorList_one" ></girdView>
+        <view class='space'></view>
+        <girdViewTwo :dataList.sync= "colorList_two" ></girdView>
+        <view class='space'></view>
+    </view>
+</template>
+
+<script>
+import wepy from 'wepy';
+import GirdView from '../components/shl-components/gird-view';
+export default class ColorPage extends wepy.page {
+    config = {
+        navigationBarTitleText: '颜色'
+    };
+    components ={
+        girdViewOne: GirdView,
+        girdViewTwo: GirdView
+    };
+    data = {
+        colorList_one: [
+            {
+                titleText: '主色',
+                tipText: '用于品牌色',
+                colorText: '#FEB34A'
+            },
+            {
+                titleText: '辅助色',
+                tipText: '按钮',
+                colorText: '#FE794A'
+            },
+            {
+                titleText: '主标颜色',
+                tipText: '用于大标题',
+                colorText: '#333333'
+            },
+            {
+                titleText: '次标颜色',
+                tipText: '用于正文.tab文字',
+                colorText: '#666666'
+            },
+            {
+                titleText: '辅助说明色',
+                tipText: '用于补充性文字',
+                colorText: '#999999'
+            },
+            {
+                titleText: '分割线颜色',
+                colorText: '#ececec'
+            }
+        ],
+        colorList_two: [
+            {
+                titleText: '主色',
+                tipText: '用于品牌色',
+                colorText: '#476CD8'
+            },
+            {
+                titleText: '辅助色',
+                tipText: '按钮',
+                colorText: '#71DB99'
+            },
+            {
+                titleText: '主标颜色',
+                tipText: '用于大标题',
+                colorText: '#333333'
+            },
+            {
+                titleText: '次标颜色',
+                tipText: '用于正文.tab文字',
+                colorText: '#666666'
+            },
+            {
+                titleText: '辅助说明色',
+                tipText: '用于补充性文字',
+                colorText: '#999999'
+            },
+            {
+                titleText: '分割线颜色',
+                colorText: '#ececec'
+            }
+        ]
+    }
+}
+</script>
+
+<style>
+.space{
+    height: 100px;
+    width: 100%;
+}
+</style>

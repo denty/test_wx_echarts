@@ -1,0 +1,317 @@
+<template class="view">
+    <view class="titleLabel">组合示例</view>
+    <view class="descriptionTextBlock">
+        <view class="blockTitleLabel">小标题</view>
+        <view class="blockContentTextLabel">正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文</view>
+    </view>
+    <!-- 工地信息 -->
+    <view class="constructionSiteInfoBlock">
+        <view class="addressView">
+            <view style="color: #666666;">地址:</view>
+            <view style="color: #333333;">上海市普陀区金沙江路...</view>
+        </view>
+        <view style="display: flex; width: 100%; align-items:center; height:30px;">
+            <orderIcon :imageObj.sync= "orderIconObj"></orderIcon>
+            <view style="font-size: 14px; color: #666666; margin-left: 10px;">订单号:</view>
+            <view style="font-size: 14px; color: #333333; margin-left: 10px; flex-grow: 1;">543412</view>
+            <view style="font-size: 14px; color: #333333;">未开工</view>
+        </view>
+        <view style="display: flex; width: 100%; align-items:center; height:30px;">
+            <workerIcon :imageObj.sync= "workerIconObj"></workerIcon>
+            <view style="font-size: 14px; color: #666666; margin-left: 10px;">工人:</view>
+            <view style="font-size: 14px; color: #333333; margin-left: 10px; flex-grow: 1;">韩明</view>
+            <view style="font-size: 14px; color: #999999; margin-right: 10px;">立即联系</view>
+            <rightIcon :imageObj.sync= "rightIconObj"></rightIcon>
+        </view>
+        <view style="display: flex; width: 100%; align-items:center; height:30px;">
+            <housekeeperIcon :imageObj.sync= "housekeeperIconObj"></housekeeperIcon>
+            <view style="font-size: 14px; color: #666666; margin-left: 10px;">管家:</view>
+            <view style="font-size: 14px; color: #333333; margin-left: 10px; flex-grow: 1;">张立凯</view>
+            <view style="font-size: 14px; color: #999999; margin-right: 10px;">立即联系</view>
+            <rightIcon :imageObj.sync= "rightIconObj"></rightIcon>
+        </view>
+        <view style="display: flex; width: 100%; align-items:center; height:30px;">
+            <timeIcon :imageObj.sync= "timeIconObj"></timeIcon>
+            <view style="font-size: 14px; color: #666666; margin-left: 10px;">距离开工时间:</view>
+            <view style="font-size: 14px; color: #333333; margin-left: 10px; flex-grow: 1;">4天</view>
+        </view>
+        <infoButton class="full-button" :buttonConstructor= "infoButtonConstructor"></infoButton>
+    </view>
+    <!-- 签约信息 -->
+    <view class="signInfoBlock">
+        <signInfoSectionHeader :sectionTitle="signInfoSectionHeaderObj"></signInfoSectionHeader>
+        <view wx:for='{{signInfoDataList}}' class="signInfoCell">
+            <view style="display: flex;">
+                <view class="title-label">{{item.title}}</view>
+                <view class="content-label">{{item.content}}</view>
+            </view>
+            <view class="split-line" wx:if='{{index < 4}}'></view>
+        </view>
+    </view>
+    <!-- 详情信息 -->
+    <view class="detailInfoBlock">
+        <detailInfoSectionHeader :sectionTitle="detailInfoSectionHeaderObj"></detailInfoSectionHeader>
+        <view style="display: flex;">
+            <view class="title-label">时间开工时间</view>
+            <view class="content-label">2016年09月30日(星期五)13：00</view>
+        </view>
+        <view class="split-line"></view>
+        <view style="display: flex; width: 100%; align-items: center; height: 45px;">
+            <view class="title-label" style="width: 100%; flex-grow: 1; text-align: left;">附近工地</view>
+            <rightIcon style="margin-right: 15px;" :imageObj.sync= "rightIconObj"></rightIcon>
+        </view>
+        <view class="split-line"></view>
+        <view class="order-description">
+            <view class="blockTitleLabel">订单描述</view>
+            <view class="blockContentTextLabel">业主交底之前就开始裁处业主交底之前就开始裁处业主交底之前就开始裁处业主交底之前就开始裁处业主交</view>
+        </view>
+        <view class="split-line"></view>
+        <imageGroup class="imageGroup" :imageGroupTitle.sync= "imageGroupTitle" :imageObjList.sync= "imageObjList"></imageGroup>
+    </view>
+    <!-- 上传信息 -->
+    <view class="uploadInfoBlock">
+        <view class="addressView">
+            <view style="color: #666666;">上传时间:</view>
+            <view style="color: #333333;">今日  16:26 </view>
+        </view>
+        <view style="display: flex; width: 100%; align-items:center; height:30px;">
+            <orderIcon :imageObj.sync= "orderIconObj"></orderIcon>
+            <view style="font-size: 14px; color: #666666; margin-left: 10px;">订单号:</view>
+            <view style="font-size: 14px; color: #333333; margin-left: 10px; flex-grow: 1;">545667</view>
+        </view>
+        <view style="display: flex; width: 100%; align-items:center; height:30px;">
+            <addressIcon :imageObj.sync= "addressIconObj"></addressIcon>
+            <view style="font-size: 14px; color: #666666; margin-left: 10px;">地址:</view>
+            <view style="font-size: 14px; color: #333333; margin-left: 10px; flex-grow: 1;">上海市普陀区金沙江路456号</view>
+        </view>
+        <view style="display: flex; width: 100%; align-items:center; height:30px;">
+            <ownerIcon :imageObj.sync= "ownerIconObj"></ownerIcon>
+            <view style="font-size: 14px; color: #666666; margin-left: 10px;">业主:</view>
+            <view style="font-size: 14px; color: #333333; margin-left: 10px; flex-grow: 1;">段先生</view>
+        </view>
+        <stampIcon class="stampIcon" :imageObj.sync="stampIconObj"></stampIcon>
+    </view>
+</template>
+
+<script>
+import wepy from 'wepy';
+import OriginalImage from '../components/shl-components/original-frame-image';
+import SHLButton from '../components/shl-components/shl-button';
+import SectionHeader from '../components/shl-components/business-components/section-header';
+import ImageGroup from '../components/shl-components/business-components/image-group';
+export default class BusinessComponentPage extends wepy.page {
+    config = {
+        navigationBarTitleText: '内容组件'
+    };
+    components= {
+        orderIcon: OriginalImage,
+        workerIcon: OriginalImage,
+        housekeeperIcon: OriginalImage,
+        timeIcon: OriginalImage,
+        rightIcon: OriginalImage,
+        ownerIcon: OriginalImage,
+        addressIcon: OriginalImage,
+        stampIcon: OriginalImage,
+        infoButton: SHLButton,
+        signInfoSectionHeader: SectionHeader,
+        detailInfoSectionHeader: SectionHeader,
+        imageGroup: ImageGroup
+    };
+    data={
+        infoButtonConstructor: {
+            type: 'infoButton',
+            title: '查看详情',
+            enable: true
+        },
+        orderIconObj: {
+            imagePath: '../components/images/hint_icon/order_hollow.png'
+        },
+        workerIconObj: {
+            imagePath: '../components/images/hint_icon/worker_hollow.png'
+        },
+        housekeeperIconObj: {
+            imagePath: '../components/images/hint_icon/housekeeper_hollow.png'
+        },
+        timeIconObj: {
+            imagePath: '../components/images/hint_icon/time_hollow.png'
+        },
+        rightIconObj: {
+            imagePath: '../components/images/function_icon/more.png'
+        },
+        addressIconObj: {
+            imagePath: '../components/images/hint_icon/address_hollow.png'
+        },
+        ownerIconObj: {
+            imagePath: '../components/images/hint_icon/onwer_hollow.png'
+        },
+        stampIconObj: {
+            imagePath: '../components/images/hint_icon/uploaded_stamp.png'
+        },
+        signInfoSectionHeaderObj: '签约信息',
+        signInfoDataList: [
+            {
+                title: '签约时间:',
+                content: '2016年09月28日（星期五）13：00'
+            },
+            {
+                title: '开工时间:',
+                content: '2016年09月30日（星期五）13：00'
+            },
+            {
+                title: '完工时间:',
+                content: '2016年10月16日（星期五）13：00'
+            },
+            {
+                title: '业主已付款:',
+                content: '12,000元'
+            },
+            {
+                title: '业主待付款:',
+                content: '3,000元'
+            }
+        ],
+        detailInfoSectionHeaderObj: '详细信息',
+        imageGroupTitle: '问题图片',
+        imageObjList: [
+            {
+                imagePath: '../components/images/headshot_icon/large_headshot_square.png'
+            },
+            {
+                imagePath: '../components/images/headshot_icon/large_headshot_square.png'
+            },
+            {
+                imagePath: '../components/images/headshot_icon/large_headshot_square.png'
+            },
+            {
+                imagePath: '../components/images/headshot_icon/large_headshot_square.png'
+            },
+            {
+                imagePath: '../components/images/headshot_icon/large_headshot_square.png'
+            },
+            {
+                imagePath: '../components/images/headshot_icon/large_headshot_square.png'
+            },
+            {
+                imagePath: '../components/images/headshot_icon/large_headshot_square.png'
+            },
+            {
+                imagePath: '../components/images/headshot_icon/large_headshot_square.png'
+            },
+            {
+                imagePath: '../components/images/headshot_icon/large_headshot_square.png'
+            },
+            {
+                imagePath: '../components/images/headshot_icon/large_headshot_square.png'
+            },
+            {
+                imagePath: '../components/images/headshot_icon/large_headshot_square.png'
+            }
+        ]
+    }
+}
+</script>
+
+<style>
+.constructionSiteInfoBlock{
+    margin-top: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: white;
+}
+.uploadInfoBlock{
+    margin-top: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: white;
+    margin-bottom: 20px;
+}
+.signInfoBlock{
+    margin-top: 20px;
+    padding-top: 10px;
+    background-color: white;
+}
+.detailInfoBlock{
+    margin-top: 20px;
+    padding-top: 10px;
+    background-color: white;
+}
+.titleLabel{
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #333333;
+}
+.descriptionTextBlock{
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: white;
+}
+.blockTitleLabel{
+    font-size: 16px;
+    color: #333333;
+}
+.blockContentTextLabel{
+    margin-top: 5px;
+    font-size: 14px;
+    color: #999999
+}
+.view{
+    background-color: rgba(250, 250, 250, 1)
+}
+.addressView{
+    display: flex;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+.full-button{
+    height: 45px;
+    line-height: 45px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.split-line{
+    height: 1px;
+    margin-left: 15px;
+    margin-right: 0px;
+    background-color:#ECECEC;
+}
+.title-label{
+    font-size: 16px;
+    color: #666666;
+    text-align: center;
+    line-height: 45px;
+    margin-left: 15px;
+}
+.content-label{
+    margin-left: 10px;
+    font-size: 16px;
+    color: #333333;
+    text-align: center;
+    line-height: 45px;
+}
+.signInfoCell{
+    height: 45px;
+}
+.order-description{
+    margin-left: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.imageGroup{
+    margin-top: 10px;
+    margin-left: 15px;
+}
+.stampIcon{
+    float: right;
+    position: relative;
+    top: -110px;
+    left: 0px;
+}
+</style>

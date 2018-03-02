@@ -1,0 +1,75 @@
+<template>
+    <view class="listDouble">
+        <navigator class="listDoublecell">
+            <view class='solori'>
+                <view class='left'>
+                    <view class='title'>{{listDoubleTitle}}</view>
+                    <view class='desc'>{{listDoubleDesc}}</view>
+                </view>
+                <image src='http://shl-resource-public.oss-cn-hangzhou.aliyuncs.com/battlefury/right_icon.png'></image>
+            </view>
+        </navigator>
+    </view>
+</template>
+
+<script>
+    import wepy from 'wepy';
+    export default class ListDouble extends wepy.component {
+        props = {
+            // 父向子单向动态传值
+            listDoubleTitle: {
+                type: String,
+                default: []
+            },
+            listDoubleDesc: {
+                type: String,
+                default: []
+            }
+        };
+    }
+
+</script>
+
+<style lang="css">
+  .listDouble{
+    width: 100%;
+  }
+  .listDouble .listDoublecell{
+    background: #fff;
+    width: 100%;
+    text-align: left;
+    font-size: 34rpx;
+    color: #333;
+    line-height: 48rpx;
+    display:block;
+    padding:24rpx;
+    margin-top:20rpx;
+
+  }
+  .listDouble .listDoublecell:last-child{
+      margin-bottom: 20rpx;
+  }
+  .listDouble .listDoublecell .solori{
+      width: 94%;
+      overflow: hidden;
+  }
+  .listDouble .listDoublecell .solori image{
+    width:16rpx;
+    height:26rpx;
+    float:right;
+    margin-top: 34rpx;
+  }
+  .listDouble .listDoublecell .solori .left{
+      overflow: hidden;
+      float:left;
+      width:90%;
+  }
+  .listDouble .listDoublecell .solori .left .desc{
+    color:#888;
+    font-size:26rpx;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+</style>

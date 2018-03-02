@@ -1,0 +1,78 @@
+<template>
+    <baseList :dataList.sync= "dataList" @callbackWithCell.user = "listCallBackActionWithCell"></baseList>
+    <baseListDetail :BaseListDetail.sync= "BaseListDetail"></baseListDetail>
+    <listMore :listMore.sync= "listMore"></listMore>
+    <listMoreDetail :listMoreDetail.sync= 'listMoreDetail'></listMoreDetail>
+    <listDouble :listDoubleTitle.sync= 'listDoubleTitle' :listDoubleDesc.sync= 'listDoubleDesc'></listDouble>
+</template>
+
+<script>
+import wepy from 'wepy';
+import BaseList from '../components/shl-components/base-list';
+import BaseListDetail from '../components/shl-components/base-list-detail';
+import ListMore from '../components/shl-components/list-more';
+import ListMoreDetail from '../components/shl-components/list-more-detail';
+import ListDouble from '../components/shl-components/list-double';
+export default class listPage extends wepy.page {
+    config = {
+        navigationBarTitleText: '列表'
+    };
+    components ={
+        baseList: BaseList,
+        baseListDetail: BaseListDetail,
+        listMore: ListMore,
+        listMoreDetail: ListMoreDetail,
+        listDouble: ListDouble
+    };
+    data = {
+        dataList: [
+            {
+                title: '单行列表',
+                navigationUrl: ''
+            }
+        ],
+        BaseListDetail: '单行列表',
+        listMore: [
+            {
+                title: '多行列表',
+                navigationUrl: ''
+            },
+            {
+                title: '多行列表',
+                navigationUrl: ''
+            },
+            {
+                title: '多行列表',
+                navigationUrl: ''
+            }
+        ],
+        listMoreDetail: [
+            {
+                title: '多行列表',
+                navigationUrl: ''
+            },
+            {
+                title: '多行列表',
+                navigationUrl: ''
+            },
+            {
+                title: '多行列表',
+                navigationUrl: ''
+            }
+        ],
+        listDoubleTitle: '双行列表',
+        listDoubleDesc: '描述信息描述信息描述信息描述信息描述信息描述信息描述信息描述信息描述信息',
+    };
+    methods = {
+        listCallBackActionWithCell(cell) {
+            console.log(cell.title);
+            console.log(cell.navigationUrl);
+            this.$navigate(cell.navigationUrl);
+        }
+    }
+}
+</script>
+
+<style>
+
+</style>

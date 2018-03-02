@@ -1,0 +1,73 @@
+<template>
+    <noDataImage class="errorImage" :imageObj.sync= "noDataImageObj"></noDataImage>
+    <noMessageImage class="errorImage" :imageObj.sync= "noMessageImageObj"></noMessageImage>
+    <noTaskImage class="errorImage" :imageObj.sync= "noTaskImageObj"></noTaskImage>
+    <noOrderImage class="errorImage" :imageObj.sync= "noOrderImageObj"></noOrderImage>
+    <noNetworkImage class="errorImage" :imageObj.sync= "noNetworkImageObj"></noNetworkImage>
+    <refreshBtn class="half-button" :buttonConstructor= "halfInfoButtonConstructor"></refreshBtn>
+    <view style="margin-top: 50px; margin-bottom: 50px;"></view>
+</template>
+
+<script>
+import wepy from 'wepy';
+import OrginImage from '../components/shl-components/original-frame-image';
+import SHLButton from '../components/shl-components/shl-button';
+export default class ErrorPage extends wepy.page {
+    config = {
+        navigationBarTitleText: '空态页'
+    };
+    components= {
+        noDataImage: OrginImage,
+        noMessageImage: OrginImage,
+        noTaskImage: OrginImage,
+        noOrderImage: OrginImage,
+        noNetworkImage: OrginImage,
+        refreshBtn: SHLButton,
+    }
+    data= {
+        noDataImageObj: {
+            imagePath: '../components/images/error_icon/noData_error_Icon.png',
+            name: '暂无信息'
+        },
+        noMessageImageObj: {
+            imagePath: '../components/images/error_icon/noMessage_error_icon.png',
+            name: '暂无信息'
+        },
+        noTaskImageObj: {
+            imagePath: '../components/images/error_icon/noTask_error_icon.png',
+            name: '暂无任务'
+        },
+        noOrderImageObj: {
+            imagePath: '../components/images/error_icon/noOrder_error_icon.png',
+            name: '暂无订单'
+        },
+        noNetworkImageObj: {
+            imagePath: '../components/images/error_icon/noNetwork_error_icon.png',
+            name: '网络出错了'
+        },
+        halfInfoButtonConstructor: {
+            type: 'infoButton',
+            title: '刷新',
+            enable: true
+        }
+    }
+}
+</script>
+
+<style>
+.errorImage{
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px;
+    margin-bottom: 100px;
+}
+.half-button{
+    margin-top: -85px;
+    height: 49px;
+    line-height: 49px;
+    margin-left: 25%;
+    margin-right: 25%;
+    margin-bottom: 100px;
+}
+</style>

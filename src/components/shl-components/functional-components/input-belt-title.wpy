@@ -1,0 +1,52 @@
+<template>
+    <view class='input-belt-title'>
+        <text>{{inputLeftTitle}}</text>
+        <input placeholder-style="color:#999" placeholder="请输入..." @input = 'getInputBeltValue' value='{{inputBeltValue}}'/>
+    </view>
+</template>
+
+<script>
+    import wepy from 'wepy';
+    export default class InputBeltTitle extends wepy.component {
+        props = {
+            inputBeltValue: {
+                type: String,
+                default: 'null'
+            },
+            inputLeftTitle: {
+                type: String,
+                default: 'null'
+            }
+        };
+        methods = {
+            getInputBeltValue(e) {
+                this.$emit('getInputBeltValue', e.detail.value);
+            }
+        }
+    }
+
+</script>
+
+<style lang="css">
+    .input-belt-title{
+        width: 100%;
+        overflow:hidden;
+        background: #fff;
+        height: 90rpx;
+        line-height: 90rpx;
+        padding: 0 24rpx;
+    }
+    .input-belt-title text{
+        float:left;
+        margin-right:5%;
+    }
+    .input-belt-title input{
+        font-size: 34rpx;
+        color: #333;
+        display: block;
+        height: 90rpx;
+        line-height: 90rpx;
+    }
+   
+   
+</style>

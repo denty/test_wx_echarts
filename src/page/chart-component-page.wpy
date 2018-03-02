@@ -1,0 +1,36 @@
+
+<template>
+    <baseList :dataList.sync= "dataList" @callbackWithCell.user = "listCallBackActionWithCell"></baseList>
+</template>
+
+<script>
+import wepy from 'wepy';
+import BaseList from '../components/shl-components/base-list';
+export default class ChartComponentPage extends wepy.page {
+    config = {
+        navigationBarTitleText: '图表组件'
+    };
+    components = {
+        baseList: BaseList
+    };
+    data = {
+        dataList: [
+            {
+                title: '饼图',
+                navigationUrl: 'pie-chart-page'
+            }
+        ]
+    };
+    methods= {
+        listCallBackActionWithCell(cell) {
+            console.log(cell.title);
+            console.log(cell.navigationUrl);
+            this.$navigate(cell.navigationUrl);
+        }
+    }
+}
+</script>
+
+<style>
+
+</style>

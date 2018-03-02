@@ -1,0 +1,43 @@
+<template>
+    <view class='input-singular'>
+        <input placeholder-style="color:#999" placeholder="请输入..." @input = 'getInputValue' value='{{inputValue}}'/>
+    </view>
+</template>
+
+<script>
+    import wepy from 'wepy';
+    export default class InputSingular extends wepy.component {
+        props = {
+            inputValue: {
+                type: String,
+                default: 'null'
+            }
+        };
+        methods = {
+            getInputValue(e) {
+                this.$emit('getInputValue', e.detail.value);
+            }
+        }
+    }
+
+</script>
+
+<style lang="css">
+    .input-singular{
+        width: 100%;
+        overflow:hidden;
+        background: #fff;
+        height: 90rpx;
+        line-height: 90rpx;
+        padding: 0 24rpx;
+    }
+    .input-singular input{
+        font-size: 34rpx;
+        color: #333;
+        display: block;
+        height: 90rpx;
+        line-height: 90rpx;
+    }
+   
+   
+</style>

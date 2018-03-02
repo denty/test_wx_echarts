@@ -1,0 +1,137 @@
+<template>  
+<view style="margin-left: 15px;">反馈 / 提示 / 弹窗</view>
+    <loadingAlertButton class="full-button" :buttonConstructor.sync = "loadingAlertButtonConstructor" @touchUpInside.user = "clickButton"></loadingAlertButton>
+    <dealSuccessAlertButton class="full-button" :buttonConstructor.sync= "dealSuccessAlertButtonConstructor" @touchUpInside.user = "clickButton"></dealSuccessAlertButton>
+    <tip1AlertButton class="full-button" :buttonConstructor.sync= "tip1AlertButtonConstructor" @touchUpInside.user = "clickButton"></tip1AlertButton>
+    <tip2AlertButton class="full-button" :buttonConstructor.sync= "tip2AlertButtonConstructor" @touchUpInside.user = "clickButton"></tip2AlertButton>
+    <ensureAlertButton class="full-button" :buttonConstructor.sync= "ensureAlertButtonConstructor" @touchUpInside.user = "clickButton"></ensureAlertButton>
+    <popAlertButton class="full-button" :buttonConstructor.sync= "popAlertButtonConstructor" @touchUpInside.user = "clickButton"></popAlertButton>
+    <alert></alert>
+</template>
+
+<script>
+import wepy from 'wepy';
+import SHLButton from '../components/shl-components/shl-button';
+import Alert from '../components/shl-components/alert-component';
+export default class AlertPage extends wepy.page {
+    config = {
+        navigationBarTitleText: '弹窗交付'
+    };
+    data= {
+        loadingAlertButtonConstructor: {
+            type: 'dismissButton',
+            title: '加载中...',
+            enable: true
+        },
+        dealSuccessAlertButtonConstructor: {
+            type: 'dismissButton',
+            title: '操作成功',
+            enable: true
+        },
+        tip1AlertButtonConstructor: {
+            type: 'dismissButton',
+            title: '提示1',
+            enable: true
+        },
+        tip2AlertButtonConstructor: {
+            type: 'dismissButton',
+            title: '提示2',
+            enable: true
+        },
+        ensureAlertButtonConstructor: {
+            type: 'dismissButton',
+            title: '确认操作',
+            enable: true
+        },
+        popAlertButtonConstructor: {
+            type: 'dismissButton',
+            title: '弹窗',
+            enable: true
+        },
+    };
+    components= {
+        loadingAlertButton: SHLButton,
+        dealSuccessAlertButton: SHLButton,
+        tip1AlertButton: SHLButton,
+        tip2AlertButton: SHLButton,
+        ensureAlertButton: SHLButton,
+        popAlertButton: SHLButton,
+        alert: Alert
+    }
+
+    methods= {
+        clickButton(el) {
+            console.log(el);
+            switch (el.title) {
+            case '加载中...':
+                wx.showLoading({
+                    title: '加载中...'
+                });
+                setTimeout(function() {
+                    wx.hideLoading();
+                }, 2000);
+                break;
+            case '操作成功':
+                wx.showToast({
+                    title: '操作成功!',
+                    icon: 'success',
+                    duration: 2000
+                });
+                break;
+            case '提示1':
+                wx.showToast({
+                    title: '提示1',
+                    duration: 2000
+                });
+                break;
+            case '提示2':
+                wx.showToast({
+                    title: '提示2',
+                    duration: 2000
+                });
+                break;
+            case '确认操作':
+                wx.showModal({
+                    title: '标题',
+                    content: '告知当前状态,信息和解决方法',
+                    cancelColor: '#333333',
+                    confirmColor: '#FFA400',
+                    success: function(res) {
+                        if (res.confirm) {
+                            console.log('用户点击确定');
+                        } else if (res.cancel) {
+                            console.log('用户点击取消');
+                        }
+                    }
+                });
+                break;
+            case '弹窗':
+                this.$invoke('alert', 'showAlert', {
+                    img: '../components/images/function_icon/acceptance.png',
+                    title: '标题',
+                    content: '描述内容，最好不超过一行'
+                });
+                // this.$invoke('alert', 'showToast', {
+                //     img: '../components/images/function_icon/acceptance.png',
+                //     title: '标题',
+                //     content: '描述内容，最好不超过一行'
+                // });
+                break;
+            default:
+                break;
+            }
+        }
+    }
+}
+</script>
+
+<style>
+.full-button{
+    height: 49px;
+    line-height: 49px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+</style>

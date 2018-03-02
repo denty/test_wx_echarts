@@ -1,0 +1,47 @@
+<template>
+    <view class='title'>价格</view>
+    <view class='mb40'></view>
+    <view class='small-title'>最大字号</view>
+    <maximum :content.sync= 'content'></Maximum>
+    <view class='mb40'></view>
+    <view class='mb40'></view>
+    <view class='small-title'>默认</view>
+    <default :content.sync= 'contentTwo'></default>
+    <view class='mb40'></view>
+    <view class='mb40'></view>
+    <view class='small-title'>价格符居下</view>
+    <characterDown :content.sync= 'contentThree'></characterDown>
+    <view class='mb40'></view>
+    <view class='mb40'></view>
+    <view class='small-title'>价格突出</view>
+    <CharacterFontRed :content.sync= 'contentFour'></CharacterFontRed>
+</template>
+
+<script>
+import wepy from 'wepy';
+import Maximum from '../components/shl-components/price-font-size/maximum';
+import Default from '../components/shl-components/price-font-size/default';
+import CharacterDown from '../components/shl-components/price-font-size/character-down';
+import CharacterFontRed from '../components/shl-components/price-font-size/character-font-red';
+export default class pricePage extends wepy.page {
+    config = {
+        navigationBarTitleText: '价格'
+    };
+    components ={
+        maximum: Maximum,
+        default: Default,
+        characterDown: CharacterDown,
+        CharacterFontRed: CharacterFontRed
+    }
+    data = {
+        content: '123,45.00',
+        contentTwo: '121,45.00',
+        contentThree: '233,33.00',
+        contentFour: '123,33.00'
+    }
+}
+</script>
+
+<style type='css' src="../components/css/common.css">
+
+</style>

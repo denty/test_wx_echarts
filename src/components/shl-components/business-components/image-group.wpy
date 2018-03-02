@@ -1,0 +1,45 @@
+<template>
+    <view>
+        <view>{{imageGroupTitle}}</view>
+        <scroll-view style="width:100%; display: flex;  white-space: nowrap;" scroll-x="{{true}}}" scroll-top="{{scrollTop}}">
+            <view class= "imageHolder" wx:for="{{imageObjList}}">
+                <image class="image" src="{{item.imagePath}}"/>
+            </view>
+        </scroll-view>
+    </view>
+</template>
+
+<script>
+import wepy from 'wepy';
+export default class ImageGroup extends wepy.component {
+    props={
+        imageGroupTitle: {
+            type: String,
+            default: '标题'
+        },
+        imageObjList: {
+            type: Object
+        }
+    }
+    data= {
+        srollWidth: 600
+    };
+}
+</script>
+
+<style>
+.imageGroupTitle{
+    font-size: 16px;
+    color: #333333;
+}
+.image{
+    width: 58px;
+    height: 58px;
+}
+.imageHolder{
+    display: inline-block;
+    padding-top: 10px;
+    padding-right: 15px;
+    padding-bottom: 10px;
+}
+</style>
