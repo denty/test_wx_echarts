@@ -18,11 +18,10 @@
         data = {
             canvasId: 'mychart-pie',
             ec: {
-                onInit: this.initChart()
+                onInit: this.initChart
             }
         };
         onLoad() {
-            console.log('heheheeheh');
         }
         initChart(canvas, width, height) {
             const chart = echarts.init(canvas, null, {
